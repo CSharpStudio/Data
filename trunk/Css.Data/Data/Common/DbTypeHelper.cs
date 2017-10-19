@@ -10,7 +10,7 @@ namespace Css.Data.Common
 {
     public static class DbTypeHelper
     {
-        public static DbType ConvertFromCLRType(Type clrType)
+        public static DbType ToDbType(Type clrType)
         {
             if (clrType.IsEnum) { return DbType.Int32; }
             if (clrType == typeof(string)) { return DbType.String; }
@@ -34,7 +34,7 @@ namespace Css.Data.Common
 
             if (clrType.IsNullable())
             {
-                return ConvertFromCLRType(clrType.IgnoreNullable());
+                return ToDbType(clrType.IgnoreNullable());
             }
 
             return DbType.String;

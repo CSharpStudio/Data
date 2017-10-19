@@ -8,7 +8,7 @@
     <Authors>Eric Leung</Authors>
     <Company>www.CSharpStudio.org</Company>
     <PackageProjectUrl>https://github.com/CSharpStudio/Data</PackageProjectUrl>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/31396174?s=460&amp;v=4</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/CSharpStudio/Data/master/CSharpStudio.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/CSharpStudio/Data.git</RepositoryUrl>
     <Copyright>Copyright 2018</Copyright>
   </PropertyGroup>

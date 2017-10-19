@@ -16,16 +16,16 @@ namespace Css.Data.Oracle
             return value ? "1" : "0";
         }
 
-        public static bool? ToCLRBoolean(object value)
+        public static bool? ToClrBoolean(object value)
         {
             if (value == null)
                 return null;
             return value.ToString() == "1" ? true : false;
         }
 
-        public static DbType ConvertFromCLRType(Type clrType)
+        public static DbType ToDbType(Type clrType)
         {
-            var value = DbTypeHelper.ConvertFromCLRType(clrType);
+            var value = DbTypeHelper.ToDbType(clrType);
             if (value == DbType.Boolean)
             {
                 value = DbType.String;
@@ -46,7 +46,7 @@ namespace Css.Data.Oracle
             {
                 case DbType.String:
                 case DbType.AnsiString:
-                    if (!string.IsNullOrEmpty(length))
+                    if (length.IsNotEmpty())
                     {
                         if ("max".CIEquals(length))
                             return "CLOB";

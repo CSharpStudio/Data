@@ -31,6 +31,8 @@ namespace Css.Data
 
         bool _isConnectionCreated;
 
+        DbConnectionSchema _connectionSchema;
+
         /// <summary>
         /// 获取数据库链接
         /// </summary>
@@ -41,6 +43,76 @@ namespace Css.Data
         /// </summary>
         public IDbParameterFactory ParameterFactory => this;
 
+        public DbConnectionSchema DbConnectionSchema => _connectionSchema;
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor
+        /// 
+        /// this accessor uses <see cref="DbSetting"/> class to find its connection string, and creates connection by itself.
+        /// </summary>
+        /// <param name="connectionStringSettingName">the setting name in configuration file.</param>
+        public DbAccesser(string connectionStringSettingName)
+        {
+            var setting = DbSetting.FindOrCreate(connectionStringSettingName);
+            Init(setting);
+        }
+
+        /// <summary>
+        /// 初始化实例<see cref="DbAccesser"/>.通过链接字符串，创建数据库链接
+        /// </summary>
+        /// <param name="connectionString">链接字符串</param>
+        /// <param name="connectionProvider">
+        /// 数据库提供者，例如"System.Data.SqlClient"
+        /// </param>
+        public DbAccesser(string connectionString, string connectionProvider)
+        {
+            Check.NotNullOrEmpty(connectionString, nameof(connectionString));
+            Check.NotNullOrEmpty(connectionProvider, nameof(connectionProvider));
+
+            Init(new DbConnectionSchema(connectionString, connectionProvider));
+        }
+
+        /// <summary>
+        /// 初始化实例<see cref="DbAccesser"/>.通过schema查找链接字符串，创建数据库链接
+        /// </summary>
+        /// <param name="schema">数据库链接方案</param>
+        public DbAccesser(DbConnectionSchema schema)
+        {
+            Check.NotNull(schema, nameof(schema));
+            Init(schema);
+        }
+
+        /// <summary>
+        /// 初始化实例<see cref="DbAccesser"/>
+        /// </summary>
+        /// <param name="schema">数据库链接方案</param>
+        /// <param name="dbConnection">使用已存在的数据库链接而不是创建新的</param>
+        public DbAccesser(DbConnectionSchema schema, IDbConnection dbConnection)
+        {
+            Init(schema, dbConnection);
+        }
+
+        void Init(DbConnectionSchema schema, IDbConnection connection = null)
+        {
+            _connectionSchema = schema;
+
+            _factory = DbProvider.GetFactory(schema.ProviderName);
+            _sqlDialect = DbProvider.GetDialect(schema.ProviderName);
+            if (connection == null)
+            {
+                _connection = _factory.CreateConnection();
+                _connection.ConnectionString = schema.ConnectionString;
+                _isConnectionCreated = true;
+            }
+            else
+            {
+                _connection = connection;
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Open the connection
