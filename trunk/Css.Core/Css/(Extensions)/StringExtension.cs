@@ -3,13 +3,16 @@ using System.Linq;
 
 namespace System
 {
+    /// <summary>
+    /// 字符串扩展方法
+    /// </summary>
     public static class StringExtension
     {
         /// <summary>
         /// 比较两个字符串是否相等。忽略大小写
         /// </summary>
-        /// <param name="str"></param>
-        /// <param name="target"></param>
+        /// <param name="str">扩展的字符串对象</param>
+        /// <param name="target">目标字符串</param>
         /// <returns></returns>
         public static bool CIEquals(this string str, string target)
         {
@@ -17,55 +20,39 @@ namespace System
         }
 
         /// <summary>
-        /// judge this string is :
-        /// null/String.Empty/all white spaces.
+        /// 判断字符串是null或者<see cref="string.Empty"/>或者全空格.
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="str">扩展的字符串对象</param>
         /// <returns></returns>
         public static bool IsNullOrWhiteSpace(this string str)
         {
             return string.IsNullOrWhiteSpace(str);
         }
 
+        /// <summary>
+        /// 判断字符串是null或者<see cref="string.Empty"/>
+        /// </summary>
+        /// <param name="str">扩展的字符串对象</param>
+        /// <returns></returns>
         public static bool IsNullOrEmpty(this string str)
         {
             return string.IsNullOrEmpty(str);
         }
 
         /// <summary>
-        /// 判断字符串是否不为Null且不为String.Empty 
+        /// 判断字符串是否不为Null且不为<see cref="string.Empty"/>
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="str">扩展的字符串对象</param>
         /// <returns></returns>
         public static bool IsNotEmpty(this string str)
         {
             return !string.IsNullOrEmpty(str);
         }
 
-        public static bool IsNullOrLengthBetween(this string str, int minLength, int maxLength)
-        {
-            if (str == null)
-            {
-                return true;
-            }
-            return str.IsLengthBetween(minLength, maxLength);
-        }
-
-        public static bool IsLengthBetween(this string str, int minLength, int maxLength)
-        {
-            if (str == null)
-            {
-                return false;
-            }
-            int length = str.Length;
-            return length <= maxLength && length >= minLength;
-        }
-
         /// <summary>
-        /// Removes all leading and trailing white-space characters from the current System.String object.
-        /// if it is null, return the string.Empty.
+        /// 移除字符串前后空格.如果字符串是null,返回<see cref="string.Empty"/>
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="s">扩展的字符串对象</param>
         /// <returns></returns>
         public static string TrimNull(this string s)
         {
@@ -75,8 +62,8 @@ namespace System
         /// <summary>
         /// 格式化字符串
         /// </summary>
-        /// <param name="str"></param>
-        /// <param name="args"></param>
+        /// <param name="str">扩展的字符串对象</param>
+        /// <param name="args">格式化参数</param>
         /// <returns></returns>
         public static string FormatArgs(this string str, params object[] args)
         {
@@ -84,10 +71,10 @@ namespace System
         }
 
         /// <summary>
-        /// Concat strings by specified separator.
+        /// 使用指定的分隔符把字符串拼接.
         /// </summary>
-        /// <param name="arr"></param>
-        /// <param name="separator"></param>
+        /// <param name="arr">扩展的字符串集合</param>
+        /// <param name="separator">分隔符</param>
         /// <returns>string</returns>
         public static string Concat(this IEnumerable<string> arr, string separator)
         {

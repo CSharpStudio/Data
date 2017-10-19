@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Css.Properties;
+using System;
 using System.Collections.Generic;
 
 namespace Css
 {
     /// <summary>
-    /// A helper class for check arguments.
+    /// 参数检查方法帮助类.
     /// </summary>
     public class Check
     {
         /// <summary>
-        /// Assert value is not null. <see cref="ArgumentNullException"/> will be throw when value is null
+        /// 断言参数不是null
         /// </summary>
-        /// <typeparam name="T">Type of the value</typeparam>
-        /// <param name="value">The parameter value</param>
-        /// <param name="parameterName">The name of the parameter</param>
+        /// <typeparam name="T">参数类型</typeparam>
+        /// <param name="value">参数值</param>
+        /// <param name="parameterName">参数名称</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         public static T NotNull<T>(T value, string parameterName)
@@ -27,24 +28,24 @@ namespace Css
         }
 
         /// <summary>
-        /// Assert the string value is not null or <see cref="string.Empty"/>
+        /// 断言字符串参数不是null且不是<see cref="string.Empty"/>
         /// </summary>
-        /// <param name="value">The string value</param>
-        /// <param name="parameterName">The name of parameter</param>
+        /// <param name="value">字符串参数值</param>
+        /// <param name="parameterName">参数名称</param>
         /// <exception cref="ArgumentException"></exception>
         /// <returns></returns>
         public static string NotNullOrEmpty(string value, string parameterName)
         {
             if (value.IsNullOrEmpty())
             {
-                throw new ArgumentException($"{parameterName} can not be null or empty!", parameterName);
+                throw new ArgumentException(Resources.ParameterCannotBeNullOrEmpty.FormatArgs(parameterName));
             }
 
             return value;
         }
 
         /// <summary>
-        /// Assert the string value is not null or white space
+        /// 断言字符串参数不是null且不是全空格
         /// </summary>
         /// <param name="value">The string value</param>
         /// <param name="parameterName">The name of parameter</param>
@@ -53,14 +54,14 @@ namespace Css
         {
             if (value.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException($"{parameterName} can not be null, empty or white space!", parameterName);
+                throw new ArgumentException(Resources.ParameterCannotBeNullOrWhiteSpace.FormatArgs(parameterName));
             }
 
             return value;
         }
 
         /// <summary>
-        /// Assert the collection value is not null and <see cref="ICollection{T}.Count"/> is greater then zero
+        /// 断言参数不是null且<see cref="ICollection{T}.Count"/>大于0
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value">The collection value</param>
@@ -70,7 +71,7 @@ namespace Css
         {
             if (value.IsNullOrEmpty())
             {
-                throw new ArgumentException(parameterName + " can not be null or empty!", parameterName);
+                throw new ArgumentException(Resources.ParameterCannotBeNullOrEmpty.FormatArgs(parameterName));
             }
 
             return value;

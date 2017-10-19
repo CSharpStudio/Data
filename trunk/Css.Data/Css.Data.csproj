@@ -2,28 +2,31 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace></RootNamespace>
-    <Description>The core lib of CSharpStudio</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RootNamespace>Css</RootNamespace>
     <Authors>Eric Leung</Authors>
     <Company>www.CSharpStudio.org</Company>
-    <PackageProjectUrl>https://github.com/CSharpStudio/Data</PackageProjectUrl>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/31396174?s=460&amp;v=4</PackageIconUrl>
-    <RepositoryUrl>https://github.com/CSharpStudio/Data.git</RepositoryUrl>
+    <Description>The lib of CSharpStudio for data access.</Description>
     <Copyright>Copyright 2018</Copyright>
+    <PackageProjectUrl>https://github.com/CSharpStudio/Data</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CSharpStudio/Data.git</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>10.0.3</Version>
-    </PackageReference>
     <PackageReference Include="NUnit">
       <Version>3.8.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SqlClient">
+      <Version>4.4.0</Version>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
+    <ProjectReference Include="..\Css.Core\Css.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Data\Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -31,10 +34,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
+    <EmbeddedResource Update="Data\Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
