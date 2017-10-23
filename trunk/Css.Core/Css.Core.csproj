@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>Css</RootNamespace>
     <Description>The core lib of CSharpStudio</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Eric Leung</Authors>
@@ -13,12 +13,35 @@
     <Copyright>Copyright 2018</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Compile Remove="%2528Extensions%2529\**" />
+    <EmbeddedResource Remove="%2528Extensions%2529\**" />
+    <None Remove="%2528Extensions%2529\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="%28Extensions%29\CollectionExtension.cs" />
+    <Compile Include="%28Extensions%29\CommonExtension.cs" />
+    <Compile Include="%28Extensions%29\StringExtension.cs" />
+    <Compile Include="%28Extensions%29\TypeExtension.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Windsor">
+      <Version>4.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration">
+      <Version>2.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>10.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="NUnit">
-      <Version>3.8.1</Version>
     </PackageReference>
   </ItemGroup>
 

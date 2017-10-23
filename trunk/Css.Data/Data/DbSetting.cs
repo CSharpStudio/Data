@@ -1,4 +1,5 @@
 ﻿using Css.Data.Common;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -38,6 +39,10 @@ namespace Css.Data
                 {
                     if (!_generatedSettings.TryGetValue(dbSettingName, out setting))
                     {
+                        var cfg = new ConfigurationBuilder();
+                        var b =  cfg.Build();
+                        b.GetConnectionString("");
+
                         //var config = ConfigurationManager.ConnectionStrings[dbSettingName];
                         //if (config != null)
                         //{
