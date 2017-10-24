@@ -123,6 +123,8 @@ namespace Css.Services
                         var attr = type.GetCustomAttribute<ServiceAttribute>(false);
                         if (attr != null && attr.FallbackType != null)
                             Register(type, attr.FallbackType);
+                        else if (!type.IsAbstract && typeof(RemoteService).IsAssignableFrom(type))
+                            Register(type, ServiceLifeStyle.Singleton);
                     }
                 }
             }

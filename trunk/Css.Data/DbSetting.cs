@@ -1,4 +1,5 @@
-﻿using Css.Data.Common;
+﻿using Css.Configuration;
+using Css.Data.Common;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -43,19 +44,19 @@ namespace Css.Data
                         var b =  cfg.Build();
                         b.GetConnectionString("");
 
-                        //var config = ConfigurationManager.ConnectionStrings[dbSettingName];
-                        //if (config != null)
-                        //{
-                        //    setting = new DbSetting
-                        //    {
-                        //        ConnectionString = config.ConnectionString,
-                        //        ProviderName = config.ProviderName,
-                        //    };
-                        //}
-                        //else
-                        //{
-                        //    setting = Create(dbSettingName);
-                        //}
+                        var config = RT.Config.Get<ConnectionStringSection>(dbSettingName);
+                        if (config != null)
+                        {
+                            setting = new DbSetting
+                            {
+                                ConnectionString = config.ConnectionString,
+                                ProviderName = config.ProviderName,
+                            };
+                        }
+                        else
+                        {
+                            setting = Create(dbSettingName);
+                        }
 
                         setting.Name = dbSettingName;
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.OracleClient;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace Css.Data.Common
         static DbProviderFactories()
         {
             RegisterFactory(DbProvider.SqlClient, SqlClientFactory.Instance);
+            RegisterFactory(DbProvider.SqlClient, OracleClientFactory.Instance);
         }
 
         static Dictionary<string, DbProviderFactory> _factories = new Dictionary<string, DbProviderFactory>();
