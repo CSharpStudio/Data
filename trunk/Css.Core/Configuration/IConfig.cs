@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Css.Configuration
 {
     public interface IConfig
     {
+        event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Gets the main section container for this config service.
         /// </summary>
         IConfigSection Section { get; }
 
         /// <inheritdoc cref="IConfigSection.Get{T}(string, T)"/>
-        T Get<T>(string key, T defaultValue);
+        T Get<T>(string key, T defaultValue = default(T));
 
         /// <inheritdoc cref="IConfigSection.GetSection"/>
         IConfigSection GetSection(string key);

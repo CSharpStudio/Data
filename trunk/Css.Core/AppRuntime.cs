@@ -1,8 +1,10 @@
-﻿using Css.Logging;
+﻿using Css.Configuration;
+using Css.IO;
+using Css.Logging;
 using Css.Services;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Css
@@ -11,10 +13,13 @@ namespace Css
     {
         static AppRuntime()
         {
-            Config = new ConfigurationBuilder().AddJsonFile("config.json").Build();
+            Config = new ConfigBuilder().LoadXmlFile("appSettings.config").Build();
         }
 
-        public static IConfiguration Config { get; }
+        /// <summary>
+        /// 配置文件保存在运行目录
+        /// </summary>
+        public static IConfig Config { get; }
 
         /// <summary>
         /// 服务容器

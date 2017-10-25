@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Css.IO;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Css.Configuration
 {
     public interface IConfigSection
     {
+        event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
 		/// Retrieves a child section container; creating a new one on demand.
 		/// Multiple calls to this method will return the same instance (unless the entry at this key
@@ -37,5 +41,7 @@ namespace Css.Configuration
         void SetList<T>(string key, IEnumerable<T> value);
 
         bool Remove(string key);
+
+        void Save(FileName file);
     }
 }

@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Css.IO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -210,7 +212,7 @@ namespace Css.Configuration
                     }
                     else
                     {
-                        RT.Logger.Warn("Properties.GetList(" + key + ") - this entry is not a list");
+                        RT.Logger.Warn("XmlConfigSection.GetList(" + key + ") - this entry is not a list");
                     }
                 }
                 return new T[0];
@@ -300,7 +302,7 @@ namespace Css.Configuration
                 for (XmlConfigSection ancestor = this; ancestor != null; ancestor = ancestor.parent)
                 {
                     if (ancestor == xmlSection)
-                        throw new InvalidOperationException("Cannot add a properties container to itself.");
+                        throw new InvalidOperationException("Cannot add a section container to itself.");
                 }
 
                 object oldValue;
@@ -313,7 +315,7 @@ namespace Css.Configuration
                 lock (xmlSection.syncRoot)
                 {
                     if (xmlSection.parent != null)
-                        throw new InvalidOperationException("Cannot attach nested properties that already have a parent.");
+                        throw new InvalidOperationException("Cannot attach nested section that already have a parent.");
                     MakeDirty();
                     xmlSection.SetSyncRoot(syncRoot);
                     xmlSection.parent = this;
@@ -420,7 +422,6 @@ namespace Css.Configuration
             {
                 element.Add(new XAttribute("key", key));
             }
-            element.Add(new XAttribute("class", sourceType.GetQualifiedName()));
             element.Value = JsonConvert.SerializeObject(value);
             return element;
         }
@@ -432,10 +433,7 @@ namespace Css.Configuration
             XElement element = serializedVal as XElement;
             if (element != null)
             {
-                var el = element.Elements().Single();
-                var @class = el.Attribute("class").Value;
-                var type = Type.GetType(@class);
-                return JsonConvert.DeserializeObject(el.Value, type);
+                return JsonConvert.DeserializeObject(element.Value, targetType);
             }
             else
             {
@@ -445,6 +443,136 @@ namespace Css.Configuration
                 TypeConverter c = TypeDescriptor.GetConverter(targetType);
                 return c.ConvertFromInvariantString(text);
             }
+        }
+
+        public static XmlConfigSection Load(FileName fileName)
+        {
+            try
+            {
+                return Load(XDocument.Load(fileName).Root);
+            }
+            catch(Exception exc)
+            {
+                RT.Logger.Warn(exc);
+                var section = new XmlConfigSection();
+                section.Save(fileName);
+                return section;
+            }
+        }
+
+        public static XmlConfigSection Load(XElement element)
+        {
+            XmlConfigSection properties = new XmlConfigSection();
+            properties.LoadContents(element.Elements());
+            return properties;
+        }
+
+        void LoadContents(IEnumerable<XElement> elements)
+        {
+            foreach (var element in elements)
+            {
+                string key = (string)element.Attribute("key");
+                if (key == null)
+                    continue;
+                switch (element.Name.LocalName)
+                {
+                    case "Section":
+                        dict[key] = element.Value;
+                        break;
+                    case "Array":
+                        dict[key] = LoadArray(element.Elements());
+                        break;
+                    case "SerializedObject":
+                        dict[key] = new XElement(element);
+                        break;
+                    case "Sections":
+                        XmlConfigSection child = new XmlConfigSection(this);
+                        child.LoadContents(element.Elements());
+                        dict[key] = child;
+                        break;
+                }
+            }
+        }
+
+        static object[] LoadArray(IEnumerable<XElement> elements)
+        {
+            List<object> result = new List<object>();
+            foreach (var element in elements)
+            {
+                switch (element.Name.LocalName)
+                {
+                    case "Null":
+                        result.Add(null);
+                        break;
+                    case "Element":
+                        result.Add(element.Value);
+                        break;
+                    case "SerializedObject":
+                        result.Add(new XElement(element));
+                        break;
+                }
+            }
+            return result.ToArray();
+        }
+
+        public void Save(FileName fileName)
+        {
+            new XDocument(Save()).Save(fileName);
+        }
+
+        public XElement Save()
+        {
+            lock (syncRoot)
+            {
+                return new XElement("Sections", SaveContents());
+            }
+        }
+
+        IReadOnlyList<XElement> SaveContents()
+        {
+            List<XElement> result = new List<XElement>();
+            foreach (var pair in dict)
+            {
+                XAttribute key = new XAttribute("key", pair.Key);
+                XmlConfigSection child = pair.Value as XmlConfigSection;
+                if (child != null)
+                {
+                    var contents = child.SaveContents();
+                    if (contents.Count > 0)
+                        result.Add(new XElement("Sections", key, contents));
+                }
+                else if (pair.Value is object[])
+                {
+                    object[] array = (object[])pair.Value;
+                    XElement[] elements = new XElement[array.Length];
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        XElement obj = array[i] as XElement;
+                        if (obj != null)
+                        {
+                            elements[i] = new XElement(obj);
+                        }
+                        else if (array[i] == null)
+                        {
+                            elements[i] = new XElement("Null");
+                        }
+                        else
+                        {
+                            elements[i] = new XElement("Element", (string)array[i]);
+                        }
+                    }
+                    result.Add(new XElement("Array", key, elements));
+                }
+                else if (pair.Value is XElement)
+                {
+                    result.Add(new XElement((XElement)pair.Value));
+                }
+                else
+                {
+                    result.Add(new XElement("Section", key, (string)pair.Value));
+                }
+            }
+            return result;
         }
     }
 }
