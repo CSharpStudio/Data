@@ -417,7 +417,7 @@ namespace Css.Configuration
                 return c.ConvertToInvariantString(value);
             }
 
-            var element = new XElement("SerializedObject");
+            var element = new XElement("Object");
             if (key != null)
             {
                 element.Add(new XAttribute("key", key));
@@ -482,7 +482,7 @@ namespace Css.Configuration
                     case "Array":
                         dict[key] = LoadArray(element.Elements());
                         break;
-                    case "SerializedObject":
+                    case "Object":
                         dict[key] = new XElement(element);
                         break;
                     case "Sections":
@@ -507,7 +507,7 @@ namespace Css.Configuration
                     case "Element":
                         result.Add(element.Value);
                         break;
-                    case "SerializedObject":
+                    case "Object":
                         result.Add(new XElement(element));
                         break;
                 }

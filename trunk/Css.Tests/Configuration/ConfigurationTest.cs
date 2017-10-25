@@ -83,7 +83,6 @@ namespace Css.Tests.Configuration
             _config.Set("Date", now);
             _config.Save();
 
-
             _config = new ConfigBuilder().LoadXmlFile("test.config").Build();
 
             Assert.Equal("StringValue", _config.Get<string>("String"));

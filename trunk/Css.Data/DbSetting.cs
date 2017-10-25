@@ -1,6 +1,5 @@
 ﻿using Css.Configuration;
 using Css.Data.Common;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -40,11 +39,7 @@ namespace Css.Data
                 {
                     if (!_generatedSettings.TryGetValue(dbSettingName, out setting))
                     {
-                        var cfg = new ConfigurationBuilder();
-                        var b =  cfg.Build();
-                        b.GetConnectionString("");
-
-                        var config = RT.Config.Get<ConnectionStringSection>(dbSettingName);
+                        var config = RT.Config.GetConnectionString(dbSettingName);
                         if (config != null)
                         {
                             setting = new DbSetting
@@ -109,27 +104,27 @@ namespace Css.Data
         static DbSetting Create(string dbSettingName)
         {
             //查找连接字符串时，根据用户的 LocalSqlServer 来查找。
-            //var local = ConfigurationManager.ConnectionStrings[DbProvider.LocalServer];
-            //if (local != null && local.ProviderName == DbProvider.SqlClient)
-            //{
-            //    var builder = new SqlConnectionStringBuilder(local.ConnectionString);
+            var local = RT.Config.GetConnectionString(DbProvider.LocalServer);
+            if (local != null && local.ProviderName == DbProvider.SqlClient)
+            {
+                var builder = new SqlConnectionStringBuilder(local.ConnectionString);
 
-            //    var newCon = new SqlConnectionStringBuilder();
-            //    newCon.DataSource = builder.DataSource;
-            //    newCon.InitialCatalog = dbSettingName;
-            //    newCon.IntegratedSecurity = builder.IntegratedSecurity;
-            //    if (!newCon.IntegratedSecurity)
-            //    {
-            //        newCon.UserID = builder.UserID;
-            //        newCon.Password = builder.Password;
-            //    }
+                var newCon = new SqlConnectionStringBuilder();
+                newCon.DataSource = builder.DataSource;
+                newCon.InitialCatalog = dbSettingName;
+                newCon.IntegratedSecurity = builder.IntegratedSecurity;
+                if (!newCon.IntegratedSecurity)
+                {
+                    newCon.UserID = builder.UserID;
+                    newCon.Password = builder.Password;
+                }
 
-            //    return new DbSetting
-            //    {
-            //        ConnectionString = newCon.ToString(),
-            //        ProviderName = local.ProviderName
-            //    };
-            //}
+                return new DbSetting
+                {
+                    ConnectionString = newCon.ToString(),
+                    ProviderName = local.ProviderName
+                };
+            }
 
             return new DbSetting
             {
