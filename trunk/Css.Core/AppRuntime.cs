@@ -1,4 +1,5 @@
-﻿using Css.Services;
+﻿using Css.Logging;
+using Css.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,11 @@ namespace Css
         /// 服务容器
         /// </summary>
         public static IServiceContainer Service { get; } = new ServiceContainer();
+
+        /// <summary>
+        /// 日志
+        /// </summary>
+        public static ILog Logger { get { return LogService.Logger; } }
     }
 
     public class RT : AppRuntime { }
