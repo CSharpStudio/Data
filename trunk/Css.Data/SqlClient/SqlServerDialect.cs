@@ -8,44 +8,53 @@ using System.Threading.Tasks;
 
 namespace Css.Data.SqlClient
 {
-    class SqlServerDialect : ISqlDialect
+    internal class SqlServerDialect : SqlDialect
     {
-        public string ToSpecialDbSql(string commonSql)
+        public override string ToSpecialDbSql(string commonSql)
         {
-            return SqlDialect.ReParameterName.Replace(commonSql, "@p${number}");
+            return ReParameterName.Replace(commonSql, "@p${number}");
         }
 
-        public string GetParameterName(int number)
+        public override string GetParameterName(int number)
         {
             return "@p" + number;
         }
 
-        public void PrepareParameter(IDbDataParameter p)
+        public override void PrepareParameter(System.Data.IDbDataParameter p)
         {
-
+            //if (p.Direction == System.Data.ParameterDirection.Output || p.Direction == System.Data.ParameterDirection.ReturnValue)
+            //{
+            //    if (p.DbType == DbType.Object)
+            //    {
+            //        p.DbType = DbType.Int32;
+            //    }
+            //}
         }
 
-        public void PrepareCommand(IDbCommand command)
+        public override void PrepareCommand(IDbCommand command)
         {
-
+            if (command.CommandType == CommandType.StoredProcedure)
+            {
+                command.CommandText = PrepareIdentifier(command.CommandText);
+            }
         }
 
-        public object PrepareValue(object value)
+        public override object PrepareValue(object value)
         {
             return value ?? DBNull.Value;
         }
 
-        public string PrepareIdentifier(string identifier)
+        public override string PrepareIdentifier(string identifier)
         {
             return "[{0}]".FormatArgs(identifier);
         }
 
-        public string DbTimeValueSql()
+        public override string DbTimeValueSql()
         {
             return "GETDATE()";
         }
 
-        public string SelectDbTimeSql()
+        public override string SelectDbTimeSql()
         {
             return "SELECT GETDATE()";
         }
@@ -54,12 +63,12 @@ namespace Css.Data.SqlClient
         /// 获取序列下一个值(Oracle,SqlServer2012)
         /// </summary>
         /// <returns></returns>
-        public string SelectSeqNextValueSql(string tableName, string columnName)
+        public override string SelectSeqNextValueSql(string tableName, string columnName)
         {
             return "SELECT NEXT VALUE FOR SEQ_{0}_{1}".FormatArgs(tableName, columnName);
         }
 
-        public string SeqNextValueSql(string tableName, string columnName)
+        public override string SeqNextValueSql(string tableName, string columnName)
         {
             return "NEXT VALUE FOR SEQ_{0}_{1}".FormatArgs(tableName, columnName);
         }

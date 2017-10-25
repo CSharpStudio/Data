@@ -11,7 +11,7 @@ namespace Css.Logging
         static ILog log = GetLogger("app_logger");
 
         /// <summary>
-        /// 默认Logger,名称为Platform_logger
+        /// 默认Logger,名称为app_logger
         /// </summary>
         public static ILog Logger { get { return log; } }
 
@@ -29,7 +29,7 @@ namespace Css.Logging
         public static void SetFactory(ILoggerFactoryAdapter loggerFactoryAdapter)
         {
             factory = loggerFactoryAdapter;
-            log = GetLogger("platform_logger");
+            log = GetLogger("app_logger");
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace Css.Data.Common
         static DbProviderFactories()
         {
             RegisterFactory(DbProvider.SqlClient, SqlClientFactory.Instance);
-            RegisterFactory(DbProvider.SqlClient, OracleClientFactory.Instance);
+            RegisterFactory(DbProvider.Oracle, OracleClientFactory.Instance);
         }
 
         static Dictionary<string, DbProviderFactory> _factories = new Dictionary<string, DbProviderFactory>();

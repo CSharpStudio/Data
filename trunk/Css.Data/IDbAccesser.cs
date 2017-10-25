@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.Common;
 using System.Data;
+using Css.Data.Common;
 
 namespace Css.Data
 {
@@ -11,6 +12,8 @@ namespace Css.Data
     /// </summary>
     public interface IDbAccesser : IDisposable
     {
+        ISqlDialect SqlDialect { get; }
+
         /// <summary>
         /// 关系数据库链接
         /// </summary>

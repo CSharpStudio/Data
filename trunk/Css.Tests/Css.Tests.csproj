@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Css.Core\Css.Core.csproj" />
+    <ProjectReference Include="..\Css.Data\Css.Data.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties config_1json__JSONSchema="http://json.schemastore.org/bowerrc" /></VisualStudio></ProjectExtensions>

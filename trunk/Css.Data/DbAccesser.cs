@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Text;
 using Css.ComponentModel;
 using Css.Data.Common;
+using Css.Data.Transaction;
 using Css.Diagnostics;
 
 namespace Css.Data
@@ -32,6 +33,8 @@ namespace Css.Data
         bool _isConnectionCreated;
 
         DbConnectionSchema _connectionSchema;
+
+        public ISqlDialect SqlDialect => _sqlDialect;
 
         /// <summary>
         /// 获取数据库链接
@@ -185,11 +188,11 @@ namespace Css.Data
             command.CommandType = type;
             //command.CommandTimeout = _commandTimeout;
 
-            //var tran = LocalTransactionBlock.GetCurrentTransaction(_connectionSchema.Database);
-            //if (tran != null && tran.Connection == _connection)
-            //{
-            //    command.Transaction = tran;
-            //}
+            var tran = LocalTransactionBlock.GetCurrentTransaction(_connectionSchema.Database);
+            if (tran != null && tran.Connection == _connection)
+            {
+                command.Transaction = tran;
+            }
 
             var pas = command.Parameters;
             for (int i = 0, c = parameters.Length; i < c; i++)
