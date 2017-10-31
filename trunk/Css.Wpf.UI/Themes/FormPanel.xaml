@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
+                    xmlns:Controls="clr-namespace:Css.Wpf.UI.Controls">
+
+    <Style TargetType="Controls:FormPanel" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <Style.Resources>
+            <ResourceDictionary />
+        </Style.Resources>
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Controls:FormPanel">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top" Content="{TemplateBinding HeaderedContentControl.Header}" ContentTemplate="{TemplateBinding HeaderedContentControl.HeaderTemplate}" ContentStringFormat="{TemplateBinding HeaderedContentControl.HeaderStringFormat}" ContentSource="Header" />
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}" ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" />
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

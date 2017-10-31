@@ -229,5 +229,22 @@ namespace Css.Services
                     return registration;
             }
         }
+
+        static void CheckVirtualMethods(Type type)
+        {
+            var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            foreach (var m in methods)
+            {
+                if ((m.IsPublic || m.IsFamily) && !m.IsVirtual)
+                {
+                    if (Attribute.IsDefined(m.DeclaringType, typeof(LocalAttribute))
+                       || Attribute.IsDefined(m, typeof(LocalAttribute)))
+                        continue;
+                    if (m.DeclaringType == typeof(RemoteService) || m.DeclaringType == typeof(object))
+                        continue;
+                    throw new RemoteServiceProxyException("控制器{0}方法{1}必须是virtual".FormatArgs(type.FullName, m.Name));
+                }
+            }
+        }
     }
 }

@@ -86,9 +86,9 @@ namespace System
             return str.Remove(str.Length - separator.Length);
         }
 
-        //public static string L10N(this string str)
-        //{
-        //    return Css.RT.ResourceService.GetText(str);
-        //}
+        public static string L10N(this string str)
+        {
+            return Css.RT.ResourceService.GetText(str);
+        }
     }
 }

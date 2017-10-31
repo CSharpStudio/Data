@@ -38,7 +38,7 @@ namespace Css
         {
             if (value.IsNullOrEmpty())
             {
-                throw new ArgumentException(Resources.ParameterCannotBeNullOrEmpty.FormatArgs(parameterName));
+                throw new ArgumentException(Css.Properties.Resources.ParameterCannotBeNullOrEmpty.FormatArgs(parameterName));
             }
 
             return value;
@@ -54,7 +54,7 @@ namespace Css
         {
             if (value.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException(Resources.ParameterCannotBeNullOrWhiteSpace.FormatArgs(parameterName));
+                throw new ArgumentException(Css.Properties.Resources.ParameterCannotBeNullOrWhiteSpace.FormatArgs(parameterName));
             }
 
             return value;
@@ -71,7 +71,7 @@ namespace Css
         {
             if (value.IsNullOrEmpty())
             {
-                throw new ArgumentException(Resources.ParameterCannotBeNullOrEmpty.FormatArgs(parameterName));
+                throw new ArgumentException(Css.Properties.Resources.ParameterCannotBeNullOrEmpty.FormatArgs(parameterName));
             }
 
             return value;

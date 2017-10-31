@@ -34,7 +34,7 @@ namespace Css.Data.SqlClient
                 if (_insertSql == null)
                 {
                     _insertSql = GenerateInsertSql();
-                    _insertSql += Environment.NewLine;
+                    _insertSql += System.Environment.NewLine;
                     _insertSql += "SELECT @@IDENTITY;";
                 }
 

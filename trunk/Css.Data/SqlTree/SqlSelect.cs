@@ -54,12 +54,12 @@
         /// </summary>
         public SqlGroupByList GroupBy { get; set; }
 
-        internal bool HasOrdered()
+        public bool HasOrdered()
         {
             return OrderBy != null && OrderBy.Count > 0;
         }
 
-        internal bool HasGroup()
+        public bool HasGroup()
         {
             return GroupBy != null && GroupBy.Count > 0;
         }

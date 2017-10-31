@@ -9,9 +9,9 @@ namespace Css.Data.SqlTree
     /// </summary>
     public class SqlArray : SqlNode
     {
-        internal SqlArray() : this(true) { }
+        public SqlArray() : this(true) { }
 
-        internal SqlArray(bool initItems)
+        public SqlArray(bool initItems)
         {
             if (initItems)
             {

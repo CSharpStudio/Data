@@ -11,7 +11,7 @@ namespace Css.Data.Common
     /// </summary>
     public class SqlFunctions
     {
-        internal static bool Contains(string method)
+        public static bool Contains(string method)
         {
             switch (method)
             {

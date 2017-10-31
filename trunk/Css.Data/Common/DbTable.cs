@@ -221,7 +221,7 @@ namespace Css.Data.Common
             return sql.ToString();
         }
 
-        internal int Execute(IDbAccesser dba, ExecuteArgs args)
+        public int Execute(IDbAccesser dba, ExecuteArgs args)
         {
             EnsureMappingTable();
             var sql = args.Type == ExecuteType.Update ? GenerateUpdateSql(args) : GenerateDeleteSql(args);

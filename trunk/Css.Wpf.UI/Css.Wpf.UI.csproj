@@ -1,0 +1,1010 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{76E02690-560C-4DD2-8B1C-1EA1FE51DE5F}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Css.Wpf</RootNamespace>
+    <AssemblyName>Css.Wpf.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET4_5</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.0.0\ref\netcoreapp2.0\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UI\Actions\CloseTabItemAction.cs" />
+    <Compile Include="UI\Actions\SetFlyoutOpenAction.cs" />
+    <Compile Include="UI\Behaviours\BindableResourceBehavior.cs" />
+    <Compile Include="UI\Behaviours\BorderlessWindowBehavior.cs" />
+    <Compile Include="UI\Behaviours\DatePickerTextBoxBehavior.cs" />
+    <Compile Include="UI\Behaviours\GlowWindowBehavior.cs" />
+    <Compile Include="UI\Behaviours\PasswordBoxBindingBehavior.cs" />
+    <Compile Include="UI\Behaviours\ReloadBehavior.cs" />
+    <Compile Include="UI\Behaviours\StylizedBehaviorCollection.cs" />
+    <Compile Include="UI\Behaviours\StylizedBehaviors.cs" />
+    <Compile Include="UI\Behaviours\TabControlSelectFirstVisibleTabBehavior.cs" />
+    <Compile Include="UI\Behaviours\TiltBehavior.cs" />
+    <Compile Include="UI\Behaviours\WindowsSettingBehaviour.cs" />
+    <Compile Include="UI\Commands\RelayCommand.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\AnchorablePaneControlOverlayArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\AnchorablePaneDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\AnchorablePaneTabPanel.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\AnchorablePaneTitle.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\AutoHideWindowManager.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\BindingHelper.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\ContextMenuEx.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DockingManagerDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DockingManagerOverlayArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DocumentPaneControlOverlayArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DocumentPaneDropAsAnchorableTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DocumentPaneDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DocumentPaneGroupDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DocumentPaneTabPanel.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DragService.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DropArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DropDownButton.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DropDownControlArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DropTargetBase.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\DropTargetType.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\Extentions.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\FocusElementManager.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\FullWeakDictionary.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\IDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\IOverlayWindow.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\IOverlayWindowArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\IOverlayWindowDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\IOverlayWindowHost.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorableControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorableFloatingWindowControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorableItem.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorablePaneControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorablePaneGroupControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorableTabItem.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorGroupControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAnchorSideControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutAutoHideWindowControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutDocumentControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutDocumentFloatingWindowControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutDocumentItem.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutDocumentPaneControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutDocumentPaneGroupControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutDocumentTabItem.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutFloatingWindowControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutGridControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutGridResizerControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutItem.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\LayoutPanelControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\MenuItemEx.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\NavigatorWindow.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\OverlayArea.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\OverlayWindow.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\OverlayWindowDropTarget.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\OverlayWindowDropTargetType.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\ReentrantFlag.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\TransformExtentions.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\WeakDictionary.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\WindowActivateEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Controls\WindowHookHandler.cs" />
+    <Compile Include="UI\Controls\AvalonDock\DockingManager.cs" />
+    <Compile Include="UI\Controls\AvalonDock\DocumentClosedEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\DocumentClosingEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Extentions.cs" />
+    <Compile Include="UI\Controls\AvalonDock\GenericTheme.cs" />
+    <Compile Include="UI\Controls\AvalonDock\LayoutEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\AnchorableShowStrategy.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\AnchorSide.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ChildrenTreeChangedEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\Extentions.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutAnchorablePane.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutContainer.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutContentSelector.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutControl.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutDocumentPane.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutElement.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutElementWithVisibility.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutGroup.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutOrientableElement.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutPane.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutPanelElement.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutPaneSerializable.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutPositionableElement.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutPreviousContainer.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutRoot.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\ILayoutUpdateStrategy.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutAnchorable.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutAnchorableFloatingWindow.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutAnchorablePane.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutAnchorablePaneGroup.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutAnchorGroup.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutAnchorSide.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutContent.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutDocument.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutDocumentFloatingWindow.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutDocumentPane.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutDocumentPaneGroup.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutElement.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutElementEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutFloatingWindow.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutGroup.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutGroupBase.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutPanel.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutPositionableGroup.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\LayoutRoot.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\Serialization\IXmlSerializeContract.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\Serialization\IXmlSerializer.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\Serialization\LayoutSerializationCallbackEventArgs.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\Serialization\LayoutSerializer.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Layout\Serialization\XmlLayoutSerializer.cs" />
+    <Compile Include="UI\Controls\AvalonDock\MathHelper.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Theme.cs" />
+    <Compile Include="UI\Controls\AvalonDock\Win32Helper.cs" />
+    <Compile Include="UI\Controls\AvalonDock\WindowHelper.cs" />
+    <Compile Include="UI\Controls\Dashboards\Animation\AnimatedContentControl.cs" />
+    <Compile Include="UI\Controls\Dashboards\Animation\AnimatedExpander.cs" />
+    <Compile Include="UI\Controls\Dashboards\Animation\AnimatedHeaderedContentControl.cs" />
+    <Compile Include="UI\Controls\Dashboards\Animation\AnimationState.cs" />
+    <Compile Include="UI\Controls\Dashboards\Animation\LoadingAnimation.cs" />
+    <Compile Include="UI\Controls\Dashboards\DragDockHeaderItems.cs" />
+    <Compile Include="UI\Controls\Dashboards\DragDockPanel.cs" />
+    <Compile Include="UI\Controls\Dashboards\DragDockPanelHost.cs" />
+    <Compile Include="UI\Controls\Dashboards\DragEvent.cs" />
+    <Compile Include="UI\Controls\Dashboards\DraggablePanel.cs" />
+    <Compile Include="UI\Controls\Dashboards\MinimizedPositions.cs" />
+    <Compile Include="UI\Controls\Dashboards\PanelState.cs" />
+    <Compile Include="UI\Controls\FormPanel\FormPanel.cs" />
+    <Compile Include="UI\Controls\Helper\AmPmComparer.cs" />
+    <Compile Include="UI\Controls\Helper\ComboBoxHelper.cs" />
+    <Compile Include="UI\Controls\Helper\ControlsHelper.cs" />
+    <Compile Include="UI\Controls\Helper\DataGridCellHelper.cs" />
+    <Compile Include="UI\Controls\Helper\DataGridRowHelper.cs" />
+    <Compile Include="UI\Controls\Helper\ExpanderHelper.cs" />
+    <Compile Include="UI\Controls\Helper\GroupBoxHelper.cs" />
+    <Compile Include="UI\Controls\Helper\HeaderHelper.cs" />
+    <Compile Include="UI\Controls\Helper\MouseWheelChange.cs" />
+    <Compile Include="UI\Controls\Helper\MouseWheelState.cs" />
+    <Compile Include="UI\Controls\Helper\PasswordBoxHelper.cs" />
+    <Compile Include="UI\Controls\Helper\ScrollBarHelper.cs" />
+    <Compile Include="UI\Controls\Helper\SliderHelper.cs" />
+    <Compile Include="UI\Controls\Helper\TabControlHelper.cs" />
+    <Compile Include="UI\Controls\Helper\TextBoxHelper.cs" />
+    <Compile Include="UI\Controls\Helper\ToggleButtonHelper.cs" />
+    <Compile Include="UI\Controls\Helper\VisibilityHelper.cs" />
+    <Compile Include="UI\Controls\Metro\Badged.cs" />
+    <Compile Include="UI\Controls\Metro\ButtonsAlignment.cs" />
+    <Compile Include="UI\Controls\Metro\ClipBorder.cs" />
+    <Compile Include="UI\Controls\Metro\ClipBorder.Utils.cs" />
+    <Compile Include="UI\Controls\Metro\CloseCommand.cs" />
+    <Compile Include="UI\Controls\Metro\ClosingWindowEventHandlerArgs.cs" />
+    <Compile Include="UI\Controls\Metro\ContentControlEx.cs" />
+    <Compile Include="UI\Controls\Metro\CustomValidationPopup.cs" />
+    <Compile Include="UI\Controls\Metro\DataGridNumericUpDownColumn.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\BaseMetroDialog.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\CustomDialog.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\DialogCoordinator.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\DialogManager.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\DialogParticipation.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\DialogStateChangedEventArgs.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\IDialogCoordinator.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\InputDialog.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\LoginDialog.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\MessageDialog.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\ProgressDialog.cs" />
+    <Compile Include="UI\Controls\Metro\Dialogs\ProgressDialogController.cs" />
+    <Compile Include="UI\Controls\Metro\DropDownButton.cs" />
+    <Compile Include="UI\Controls\Metro\Extensions.cs" />
+    <Compile Include="UI\Controls\Metro\FlipView.cs" />
+    <Compile Include="UI\Controls\Metro\Flyout.cs" />
+    <Compile Include="UI\Controls\Metro\FlyoutsControl.cs" />
+    <Compile Include="UI\Controls\Metro\FlyoutTheme.cs" />
+    <Compile Include="UI\Controls\Metro\Glow.cs" />
+    <Compile Include="UI\Controls\Metro\GlowDirection.cs" />
+    <Compile Include="UI\Controls\Metro\GlowWindow.xaml.cs">
+      <DependentUpon>GlowWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\HamburgerMenu.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\HamburgerMenu.Events.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\HamburgerMenu.HamburgerButton.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\HamburgerMenu.Options.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\HamburgerMenu.Properties.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\MenuItems\HamburgerMenuGlyphItem.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\MenuItems\HamburgerMenuIconItem.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\MenuItems\HamburgerMenuImageItem.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\MenuItems\HamburgerMenuItem.cs" />
+    <Compile Include="UI\Controls\Metro\HamburgerMenu\MenuItems\HamburgerMenuItemCollection.cs" />
+    <Compile Include="UI\Controls\Metro\HotKeyBox.cs" />
+    <Compile Include="UI\Controls\Metro\IMetroThumb.cs" />
+    <Compile Include="UI\Controls\Metro\LayoutInvalidationCatcher.cs" />
+    <Compile Include="UI\Controls\Metro\MetroAnimatedSingleRowTabControl.cs" />
+    <Compile Include="UI\Controls\Metro\MetroAnimatedTabControl.cs" />
+    <Compile Include="UI\Controls\Metro\MetroContentControl.cs" />
+    <Compile Include="UI\Controls\Metro\MetroNavigationWindow.cs" />
+    <Compile Include="UI\Controls\Metro\MetroProgressBar.cs" />
+    <Compile Include="UI\Controls\Metro\MetroTabControl.cs" />
+    <Compile Include="UI\Controls\Metro\MetroTabItem.cs" />
+    <Compile Include="UI\Controls\Metro\MetroThumb.cs" />
+    <Compile Include="UI\Controls\Metro\MetroThumbContentControl.cs" />
+    <Compile Include="UI\Controls\Metro\MetroWindow.cs" />
+    <Compile Include="UI\Controls\Metro\MetroWindowHelpers.cs" />
+    <Compile Include="UI\Controls\Metro\MultiFrameImage.cs" />
+    <Compile Include="UI\Controls\Metro\NumericUpDown.cs" />
+    <Compile Include="UI\Controls\Metro\NumericUpDownChangedRoutedEventArgs.cs" />
+    <Compile Include="UI\Controls\Metro\NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="UI\Controls\Metro\Pivot.cs" />
+    <Compile Include="UI\Controls\Metro\PivotItem.cs" />
+    <Compile Include="UI\Controls\Metro\Planerator.cs" />
+    <Compile Include="UI\Controls\Metro\Position.cs" />
+    <Compile Include="UI\Controls\Metro\ProgressRing.cs" />
+    <Compile Include="UI\Controls\Metro\PropertyChangeNotifier.cs" />
+    <Compile Include="UI\Controls\Metro\RangeParameterChangedEventArgs.cs" />
+    <Compile Include="UI\Controls\Metro\RangeSelectionChangedEventArgs.cs" />
+    <Compile Include="UI\Controls\Metro\RangeSlider.cs" />
+    <Compile Include="UI\Controls\Metro\RevealImage.xaml.cs">
+      <DependentUpon>RevealImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Metro\SafeRaise.cs" />
+    <Compile Include="UI\Controls\Metro\ScrollViewerOffsetMediator.cs" />
+    <Compile Include="UI\Controls\Metro\SplitButton.cs" />
+    <Compile Include="UI\Controls\Metro\SplitView\GridLengthAnimation.cs" />
+    <Compile Include="UI\Controls\Metro\SplitView\SplitView.cs" />
+    <Compile Include="UI\Controls\Metro\SplitView\SplitViewDisplayMode.cs" />
+    <Compile Include="UI\Controls\Metro\SplitView\SplitViewPaneClosingEventArgs.cs" />
+    <Compile Include="UI\Controls\Metro\SplitView\SplitViewPanePlacement.cs" />
+    <Compile Include="UI\Controls\Metro\SplitView\SplitViewTemplateSettings.cs" />
+    <Compile Include="UI\Controls\Metro\Theme.cs" />
+    <Compile Include="UI\Controls\Metro\Tile.cs" />
+    <Compile Include="UI\Controls\Metro\TimePicker\DateTimePicker.cs" />
+    <Compile Include="UI\Controls\Metro\TimePicker\TimePartVisibility.cs" />
+    <Compile Include="UI\Controls\Metro\TimePicker\TimePicker.cs" />
+    <Compile Include="UI\Controls\Metro\TimePicker\TimePickerBase.cs" />
+    <Compile Include="UI\Controls\Metro\TimePicker\TimePickerBaseSelectionChangedEventArgs.cs" />
+    <Compile Include="UI\Controls\Metro\ToggleSwitch.cs" />
+    <Compile Include="UI\Controls\Metro\ToggleSwitchButton.cs" />
+    <Compile Include="UI\Controls\Metro\TransitioningContentControl.cs" />
+    <Compile Include="UI\Controls\Metro\TreeHelper.cs" />
+    <Compile Include="UI\Controls\Metro\VisualStates.cs" />
+    <Compile Include="UI\Controls\Metro\WinApiHelper.cs" />
+    <Compile Include="UI\Controls\Metro\WindowButtonCommands.cs" />
+    <Compile Include="UI\Controls\Metro\WindowCommands.cs" />
+    <Compile Include="UI\Controls\Metro\WindowCommandsOverlayBehavior.cs" />
+    <Compile Include="UI\Controls\Metro\WindowSettings.cs" />
+    <Compile Include="UI\Controls\MultiComboBox\MultiComboBox.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\BalloonIcon.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\BalloonFlags.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\IconDataMembers.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\IconState.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\MouseEvent.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\NotifyCommand.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\NotifyIconData.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\NotifyIconVersion.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\Point.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\TrayInfo.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\WinApi.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\WindowClass.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\Interop\WindowMessageSink.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\PopupActivationMode.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\RoutedEventHelper.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\TaskbarIcon.cs" />
+    <Compile Include="UI\Controls\ToolbarIcon\TaskbarIcon.Declarations.cs" />
+    <Compile Include="UI\ControlzEx\BadgedEx.cs" />
+    <Compile Include="UI\ControlzEx\KeyboardNavigationEx.cs" />
+    <Compile Include="UI\Converters\ActivateCommandLayoutItemFromLayoutModelConverter.cs" />
+    <Compile Include="UI\Converters\AnchorSideToAngleConverter.cs" />
+    <Compile Include="UI\Converters\AnchorSideToOrientationConverter.cs" />
+    <Compile Include="UI\Converters\BackgroundToForegroundConverter.cs" />
+    <Compile Include="UI\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\ClockDegreeConverter.cs" />
+    <Compile Include="UI\Converters\FontSizeOffsetConverter.cs" />
+    <Compile Include="UI\Converters\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\IsNullConverter.cs" />
+    <Compile Include="UI\Converters\LayoutItemFromLayoutModelConverter.cs" />
+    <Compile Include="UI\Converters\MarkupConverter.cs" />
+    <Compile Include="UI\Converters\MetroTabItemCloseButtonWidthConverter.cs" />
+    <Compile Include="UI\Converters\NullToCollapsedConverter.cs" />
+    <Compile Include="UI\Converters\NullToDoNothingConverter.cs" />
+    <Compile Include="UI\Converters\NullToUnsetValueConverter.cs" />
+    <Compile Include="UI\Converters\OffOnConverter.cs" />
+    <Compile Include="UI\Converters\RectangleHeightToRadiusConverter.cs" />
+    <Compile Include="UI\Converters\ResizeModeMinMaxButtonVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="UI\Converters\ThicknessBindingConverter.cs" />
+    <Compile Include="UI\Converters\ThicknessToDoubleConverter.cs" />
+    <Compile Include="UI\Converters\TimeSpanToStringConverter.cs" />
+    <Compile Include="UI\Converters\ToUpperConverter.cs" />
+    <Compile Include="UI\Converters\TreeViewMarginConverter.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\ComGuids.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\Debug.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\DoubleUtil.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\DpiHelper.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\ErrorCodes.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\MessageWindow.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\NativeMethods.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\NtDll.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\ShellProvider.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\StreamHelper.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\Utilities.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\Utilities.Windows.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\Utilities.Wpf.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\Standard\Verify.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\SystemCommands.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\SystemParameters2.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\WindowChrome.cs" />
+    <Compile Include="UI\Microsoft.Windows.Shell\WindowChromeWorker.cs" />
+    <Compile Include="UI\Models\BindingEvaluator.cs" />
+    <Compile Include="UI\Models\DataContextSpy.cs" />
+    <Compile Include="UI\Models\PropertyChangeNotifier.cs" />
+    <Compile Include="UI\Models\Win32\CopyDataStruct.cs" />
+    <Compile Include="UI\Models\Win32\GWL.cs" />
+    <Compile Include="UI\Models\Win32\HitTestValues.cs" />
+    <Compile Include="UI\Models\Win32\NativeMethods.cs" />
+    <Compile Include="UI\Models\Win32\SWP.cs" />
+    <Compile Include="UI\Models\Win32\WM.cs" />
+    <Compile Include="UI\Models\Win32\WS.cs" />
+    <Compile Include="UI\Models\Win32\WSEX.cs" />
+    <Compile Include="UI\Native\Constants.cs" />
+    <Compile Include="UI\Native\MONITORINFO.cs" />
+    <Compile Include="UI\Native\POINT.cs" />
+    <Compile Include="UI\Native\RECT.cs" />
+    <Compile Include="UI\Native\SafeLibraryHandle.cs" />
+    <Compile Include="UI\Native\UnsafeNativeMethods.cs" />
+    <Compile Include="UI\Native\WINDOWPLACEMENT.cs" />
+    <Compile Include="UI\ThemeManager\Accent.cs" />
+    <Compile Include="UI\ThemeManager\AppTheme.cs" />
+    <Compile Include="UI\ThemeManager\ThemeManager.cs" />
+    <Compile Include="UI\Util.cs" />
+    <Compile Include="UI\WpfUiException.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Styles\Accents\Amber.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\AquaDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\AquaLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\BaseDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\BaseLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Blue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Brown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Cobalt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Crimson.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Cyan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Emerald.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Green.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Indigo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Lime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Magenta.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Mauve.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Olive.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Orange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Pink.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Purple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Red.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Sienna.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Steel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Taupe.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Teal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Violet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Accents\Yellow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\Clean.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\CleanGroupBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\CleanStatusBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\CleanWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\CleanWindowButtonCommands.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\CleanWindowButtons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Clean\CleanWindowCommands.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.AnimatedSingleRowTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.AnimatedTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Buttons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Calendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.DatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.GroupBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.PasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.RadioButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Scrollbars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Shadows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.StatusBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.TabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.ToggleSwitch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Toolbar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.Tooltip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.TreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Controls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\FlatButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\FlatSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Sizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ValidationErrorTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\TabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\VS\Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\AvalonDock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Badged.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ContentControlEx.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dashboards.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DateTimePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dialogs\BaseMetroDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dialogs\InputDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dialogs\LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dialogs\MessageDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Dialogs\ProgressDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DropDownButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\FlipView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Flyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\FlyoutsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\FormPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Glow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\HamburgerMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\HotKeyBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroAnimatedSingleRowTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroAnimatedTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroContentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroNavigationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroTabItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MultiComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\NumericUpDown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Pivot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ProgressRing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\RangeSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SplitButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\SplitView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Thumb.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Tile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ToggleSwitch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\TransitioningContentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WindowButtonCommands.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WindowCommands.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Metro\GlowWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\Metro\RevealImage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Generic\Images\add.png" />
+    <Resource Include="Themes\Generic\Images\close_hover.png" />
+    <Resource Include="Themes\Generic\Images\close_inactive.png" />
+    <Resource Include="Themes\Generic\Images\close_normal.png" />
+    <Resource Include="Themes\Generic\Images\close_pressed.png" />
+    <Resource Include="Themes\Generic\Images\close_rounded_hover.png" />
+    <Resource Include="Themes\Generic\Images\close_rounded_inactive.png" />
+    <Resource Include="Themes\Generic\Images\close_rounded_normal.png" />
+    <Resource Include="Themes\Generic\Images\close_rounded_pressed.png" />
+    <Resource Include="Themes\Generic\Images\close_toolwindow_hover.png" />
+    <Resource Include="Themes\Generic\Images\close_toolwindow_inactive.png" />
+    <Resource Include="Themes\Generic\Images\close_toolwindow_normal.png" />
+    <Resource Include="Themes\Generic\Images\close_toolwindow_pressed.png" />
+    <Resource Include="Themes\Generic\Images\DockAnchorableBottom.png" />
+    <Resource Include="Themes\Generic\Images\DockAnchorableLeft.png" />
+    <Resource Include="Themes\Generic\Images\DockAnchorableRight.png" />
+    <Resource Include="Themes\Generic\Images\DockAnchorableTop.png" />
+    <Resource Include="Themes\Generic\Images\DockBottom.PNG" />
+    <Resource Include="Themes\Generic\Images\DockDocumentAsAnchorableBottom.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentAsAnchorableLeft.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentAsAnchorableRight.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentAsAnchorableTop.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentBottom.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentInside.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentLeft.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentRight.png" />
+    <Resource Include="Themes\Generic\Images\DockDocumentTop.png" />
+    <Resource Include="Themes\Generic\Images\DockLeft.PNG" />
+    <Resource Include="Themes\Generic\Images\DockPane.PNG" />
+    <Resource Include="Themes\Generic\Images\DockPaneEmpty.png" />
+    <Resource Include="Themes\Generic\Images\DockPaneLargeEmpty.png" />
+    <Resource Include="Themes\Generic\Images\DockRight.PNG" />
+    <Resource Include="Themes\Generic\Images\DockTop.PNG" />
+    <Resource Include="Themes\Generic\Images\HTabGroup.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockDocPaneBottom.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockDocPaneLeft.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockDocPaneRight.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockDocPaneTop.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockPaneBottom.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockPaneInside.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockPaneLeft.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockPaneRight.png" />
+    <Resource Include="Themes\Generic\Images\InnerDockPaneTop.png" />
+    <Resource Include="Themes\Generic\Images\Locked.png" />
+    <Resource Include="Themes\Generic\Images\maximize_disabled.png" />
+    <Resource Include="Themes\Generic\Images\maximize_hover.png" />
+    <Resource Include="Themes\Generic\Images\maximize_inactive.png" />
+    <Resource Include="Themes\Generic\Images\maximize_normal.png" />
+    <Resource Include="Themes\Generic\Images\maximize_pressed.png" />
+    <Resource Include="Themes\Generic\Images\minimize_hover.png" />
+    <Resource Include="Themes\Generic\Images\minimize_inactive.png" />
+    <Resource Include="Themes\Generic\Images\minimize_normal.png" />
+    <Resource Include="Themes\Generic\Images\minimize_pressed.png" />
+    <Resource Include="Themes\Generic\Images\pencil.png" />
+    <Resource Include="Themes\Generic\Images\pGo.png" />
+    <Resource Include="Themes\Generic\Images\PinAutoHide.png" />
+    <Resource Include="Themes\Generic\Images\PinAutoHide_Black.png" />
+    <Resource Include="Themes\Generic\Images\PinAutoHide_Dark.png" />
+    <Resource Include="Themes\Generic\Images\PinClose.png" />
+    <Resource Include="Themes\Generic\Images\PinClose_Black.png" />
+    <Resource Include="Themes\Generic\Images\PinClose_Dark.png" />
+    <Resource Include="Themes\Generic\Images\PinDocMenu.png" />
+    <Resource Include="Themes\Generic\Images\PinDocMenu_Black.png" />
+    <Resource Include="Themes\Generic\Images\PinMaximize.png" />
+    <Resource Include="Themes\Generic\Images\PinMaximize_Black.png" />
+    <Resource Include="Themes\Generic\Images\PinMaximize_Dark.png" />
+    <Resource Include="Themes\Generic\Images\PinMenu.png" />
+    <Resource Include="Themes\Generic\Images\PinMenu_Black.png" />
+    <Resource Include="Themes\Generic\Images\PinMenu_Dark.png" />
+    <Resource Include="Themes\Generic\Images\PinRestore.png" />
+    <Resource Include="Themes\Generic\Images\PinRestore_Black.png" />
+    <Resource Include="Themes\Generic\Images\PinRestore_Dark.png" />
+    <Resource Include="Themes\Generic\Images\pNext.png" />
+    <Resource Include="Themes\Generic\Images\pPrev.png" />
+    <Resource Include="Themes\Generic\Images\remove.png" />
+    <Resource Include="Themes\Generic\Images\resize_grip.png" />
+    <Resource Include="Themes\Generic\Images\restore_disabled.png" />
+    <Resource Include="Themes\Generic\Images\restore_hover.png" />
+    <Resource Include="Themes\Generic\Images\restore_inactive.png" />
+    <Resource Include="Themes\Generic\Images\restore_normal.png" />
+    <Resource Include="Themes\Generic\Images\restore_pressed.png" />
+    <Resource Include="Themes\Generic\Images\VTabGroup.png" />
+    <Resource Include="UI\Controls\ToolbarIcon\DefaultTrayIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\JetBrains.Annotations.dll" />
+    <Content Include="lib\System.Windows.Interactivity.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

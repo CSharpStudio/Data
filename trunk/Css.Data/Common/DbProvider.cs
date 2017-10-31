@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Css.Data.Oracle;
+using Css.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
@@ -18,10 +20,10 @@ namespace Css.Data.Common
 
         public const string LocalServer = "LocalSqlServer";
 
-        static DbProviderFactory _sql, _oracle, _odac, _opd, _mysql;
+        static DbProviderFactory _sql, _oracle, _odac, _opd;
         static Dictionary<string, DbProviderFactory> _dbProviderFactory = new Dictionary<string, DbProviderFactory>();
         static Dictionary<string, DbProvider> _providers = new Dictionary<string, DbProvider>();
-        static ISqlDialect _sqlDialect, _oracleDialect, _mysqlDialect;
+        static ISqlDialect _sqlDialect, _oracleDialect;
 
         /// <summary>
         /// 注册数据库提供者
@@ -99,29 +101,29 @@ namespace Css.Data.Common
             return provider.CreateDialect(providerName);
         }
 
-        ///// <summary>
-        ///// 创建<see cref="DbTable"/>
-        ///// </summary>
-        ///// <param name="schema"></param>
-        ///// <param name="info"></param>
-        ///// <returns></returns>
-        //public static DbTable CreateTable(DbConnectionSchema schema, ITableInfo info)
-        //{
-        //    switch (schema.ProviderName)
-        //    {
-        //        case SqlClient:
-        //            return new SqlServerTable(info);
-        //        case Oracle:
-        //        case ODAC:
-        //        case ODP:
-        //            return new OracleTable(info);
-        //    }
-        //    DbProvider provider = GetProvider(schema.ProviderName);
-        //    return provider.CreateDbTable(schema, info);
-        //}
+        /// <summary>
+        /// 创建<see cref="DbTable"/>
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public static DbTable CreateTable(DbConnectionSchema schema, ITableInfo info)
+        {
+            switch (schema.ProviderName)
+            {
+                case SqlClient:
+                    return new SqlServerTable(info);
+                case Oracle:
+                case ODAC:
+                case ODP:
+                    return new OracleTable(info);
+            }
+            DbProvider provider = GetProvider(schema.ProviderName);
+            return provider.CreateDbTable(schema, info);
+        }
 
         protected abstract ISqlDialect CreateDialect(string provider);
 
-        //protected abstract DbTable CreateDbTable(DbConnectionSchema schema, ITableInfo info);
+        protected abstract DbTable CreateDbTable(DbConnectionSchema schema, ITableInfo info);
     }
 }

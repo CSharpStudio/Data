@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  css.servicehost:
+    image: css.servicehost
+    build:
+      context: .
+      dockerfile: Css.ServiceHost\Dockerfile

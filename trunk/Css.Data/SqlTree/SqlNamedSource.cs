@@ -9,6 +9,6 @@
         /// 获取需要引用本数据源时可用的名字。
         /// </summary>
         /// <returns></returns>
-        internal abstract string GetName();
+        public abstract string GetName();
     }
 }

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Css.Core\Css.Core.csproj" />
+    <ProjectReference Include="..\Css.Data\Css.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -23,7 +23,7 @@ namespace Css.Data.Common
             DbProviderFactory result;
             if (_factories.TryGetValue(provider, out result))
                 return result;
-            throw new DataException(Resources.DbProviderFactoryNotFound.FormatArgs(provider));
+            throw new DataException(Css.Data.Properties.Resources.DbProviderFactoryNotFound.FormatArgs(provider));
         }
 
         public static void RegisterFactory(string providerInvariantName, DbProviderFactory factory)

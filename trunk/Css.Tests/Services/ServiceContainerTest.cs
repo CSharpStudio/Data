@@ -13,8 +13,8 @@ namespace Css.Tests.Services
 
         public class MyRemoteService : RemoteService
         {
-            //RemoteService's method must be virtual and the assembly mark internal visible to []
-            public virtual string GetString()
+            //RemoteService's method must be virtual and the assembly mark internal visible to [DynamicProxyGenAssembly2]
+            public string GetString()
             {
                 return "The string";
             }

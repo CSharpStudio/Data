@@ -21,10 +21,6 @@ namespace Css.Context
         /// </summary>
         bool _scopeEntered;
         /// <summary>
-        /// 本对象是否已经被析构。
-        /// </summary>
-        bool _disposed;
-        /// <summary>
         /// 在 <see cref="_context"/> 中的名称。
         /// </summary>
         string _contextKey;

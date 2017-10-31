@@ -21,7 +21,7 @@
         /// </summary>
         public string Alias { get; set; }
 
-        internal override string GetName()
+        public override string GetName()
         {
             return Alias;
         }

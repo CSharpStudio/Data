@@ -18,10 +18,10 @@ namespace Css.Tests.Data
 
     public abstract class TransactionTest<T> : DisposableBase, IClassFixture<T> where T : DbFixture
     {
-        T _dbFixture;
-        public TransactionTest(T fix)
+        T _fixture;
+        public TransactionTest(T fixture)
         {
-            _dbFixture = fix;
+            _fixture = fixture;
         }
 
         protected override void Cleanup()
@@ -32,7 +32,7 @@ namespace Css.Tests.Data
         [Fact]
         public void TransactionScope()
         {
-            var setting = DbSetting.SetSetting("UT", _dbFixture.ConnectionString, _dbFixture.ProviderName);
+            var setting = DbSetting.SetSetting("UT", _fixture.ConnectionString, _fixture.ProviderName);
             using (var tran = DbAccesserFactory.TransactionScope(setting))
             {
                 using (var dba = DbAccesserFactory.Create("UT"))
@@ -60,7 +60,7 @@ namespace Css.Tests.Data
         [Fact]
         public void AutonomousTransactionScope()
         {
-            var setting = DbSetting.SetSetting("UT", _dbFixture.ConnectionString, _dbFixture.ProviderName);
+            var setting = DbSetting.SetSetting("UT", _fixture.ConnectionString, _fixture.ProviderName);
             using (var tran = DbAccesserFactory.TransactionScope(setting))
             {
                 using (var dba = DbAccesserFactory.Create("UT"))
