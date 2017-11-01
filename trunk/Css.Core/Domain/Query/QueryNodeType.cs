@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Css.Domain.Query
+﻿namespace Css.Domain.Query
 {
     /// <summary>
     /// 查询树节点的类型。

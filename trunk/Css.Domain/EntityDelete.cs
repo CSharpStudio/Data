@@ -1,39 +1,31 @@
-﻿using Css.Data.Common;
+﻿using Css.Data;
+using Css.Data.Common;
 using Css.Data.SqlTree;
 using Css.Domain.Query;
 using Css.Domain.Query.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Css.Domain
 {
-    public interface IEntityDelete
-    {
-        Expression Expression { get; set; }
-        EntityRepository Repository { get; }
-        int Execute();
-    }
-
-    public interface IEntityDelete<TEntity> : IEntityDelete
-    {
-        IEntityDelete<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
-    }
-
     class EntityDelete<TEntity> : IEntityDelete<TEntity>
     {
-        EntityRepository _repo;
-        public EntityRepository Repository
+        IRepository _repo;
+        public IRepository Repository
         {
             get { return _repo; }
         }
         SimplePropertyFinder PropertyFinder { get; }
-        public EntityDelete(EntityRepository repo)
+        public EntityDelete(IRepository repo)
         {
+            Debug.Assert(repo is IDbRepository, "仓库必须是IDbRepository");
             _repo = repo;
             PropertyFinder = new SimplePropertyFinder(_repo);
             Expression = Expression.Constant(this);
@@ -44,9 +36,10 @@ namespace Css.Domain
             var expression = Evaluator.PartialEval(Expression);
             var where = new EntityConditionBuilder(_repo).Build(expression);
             var args = new ExecuteArgs(ExecuteType.Delete, mainTable as SqlTable, where as ISqlConstraint);
-            using (var dba = _repo.CreateDbAccesser())
+            var repo = _repo as IDbRepository;
+            using (var dba = repo.CreateDbAccesser())
             {
-                return _repo.DbTable.Execute(dba, args);
+                return repo.DbTable.Execute(dba, args);
             }
         }
 

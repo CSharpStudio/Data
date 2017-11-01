@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Css.Domain.Metadata
+namespace Css.Domain
 {
-    internal interface IEntityConfig
+    public interface IEntityConfig
     {
         EntityMeta Meta { get; set; }
         void ConfigMeta();

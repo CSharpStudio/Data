@@ -69,7 +69,7 @@ namespace Css.Domain
             get { return this; }
         }
 
-        Entity IRefEntityProperty.Load(object id, Entity owner)
+        IEntity IRefEntityProperty.Load(object id, IEntity owner)
         {
             //通过自定义 Loader 获取实体。
             if (_loader != null)
@@ -88,5 +88,5 @@ namespace Css.Domain
     /// <param name="id">引用实体的 id。</param>
     /// <param name="owner">拥有该引用属性的实体。</param>
     /// <returns>返回对应的引用实体。</returns>
-    public delegate Entity RefEntityLoader(object id, Entity owner);
+    public delegate IEntity RefEntityLoader(object id, IEntity owner);
 }

@@ -1,9 +1,10 @@
-﻿using Css.Domain.Metadata;
+﻿using Css.Data;
 using Css.Domain.Query;
 using Css.Domain.Query.Linq;
 using Css.Reflection;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -137,11 +138,21 @@ namespace Css.Domain
 
         public static IRefEntityProperty GetParentProperty(this IRepository repo)
         {
-            var result = repo.ParentProperty;
+            Debug.Assert(repo is IEntityRepository, "仓库必须是IEntityRepository");
+            var entityRepo = repo as IEntityRepository;
+            var result = entityRepo.ParentProperty;
             if (result == null)
                 throw new ORMException("类型[{0}]没找到父引用属性".FormatArgs(repo.EntityType.Name));
             return result;
         }
+
+        public static IProperty FindProperty(this IRepository repo, string propertyName)
+        {
+            Debug.Assert(repo is IEntityRepository, "仓库必须是IEntityRepository");
+            var entityRepo = repo as IEntityRepository;
+            return entityRepo.FindProperty(propertyName);
+        }
+
         public static T ToObject<T>(this IDataReader reader)
         {
             switch (Type.GetTypeCode(typeof(T)))

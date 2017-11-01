@@ -67,7 +67,7 @@ namespace Css.Domain
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        void IEntityList.SyncParentEntityId(Entity parent)
+        void IEntityList.SyncParentEntityId(IEntity parent)
         {
             var property = GetRepository().GetParentProperty();
             this.ForEach(child =>
@@ -79,7 +79,7 @@ namespace Css.Domain
             });
         }
 
-        public void SetRefParent(Entity entity)
+        public void SetRefParent(IEntity entity)
         {
             var property = GetRepository().GetParentProperty();
             foreach (T item in Items)

@@ -11,6 +11,8 @@
     <PackageIconUrl>https://raw.githubusercontent.com/CSharpStudio/Data/master/CSharpStudio.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/CSharpStudio/Data.git</RepositoryUrl>
     <Copyright>Copyright 2018</Copyright>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../Css.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

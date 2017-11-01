@@ -1,6 +1,4 @@
-﻿using Css.Data.SqlTree;
-
-namespace Css.Domain.Query
+﻿namespace Css.Domain.Query
 {
     /// <summary>
     /// 数据源与实体数据源连接后的结果节点
@@ -36,14 +34,14 @@ namespace Css.Domain.Query
         /// <summary>
         /// 内连接
         /// </summary>
-        Inner = SqlJoinType.Inner,
+        Inner,
         /// <summary>
         /// 左外连接
         /// </summary>
-        LeftOuter = SqlJoinType.LeftOuter,
+        LeftOuter,
         /// <summary>
         /// 右外连接
         /// </summary>
-        RightOuter = SqlJoinType.RightOuter
+        RightOuter
     }
 }

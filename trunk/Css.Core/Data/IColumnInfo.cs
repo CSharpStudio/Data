@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Css.Data.Common
+namespace Css.Data
 {
     public interface IColumnInfo
     {

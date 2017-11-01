@@ -1,9 +1,11 @@
-﻿using Css.Data.Common;
+﻿using Css.Data;
+using Css.Data.Common;
 using Css.Data.SqlTree;
 using Css.Domain.Query;
 using Css.Domain.Query.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -12,26 +14,12 @@ using System.Threading.Tasks;
 
 namespace Css.Domain
 {
-    public interface IEntityUpdate
-    {
-        Expression Expression { get; set; }
-        IList<IColumnValue> Columns { get; }
-        EntityRepository Repository { get; }
-        int Execute();
-    }
-
-    public interface IEntityUpdate<TEntity> : IEntityUpdate
-    {
-        IEntityUpdate<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
-        IEntityUpdate<TEntity> Set<T>(Expression<Func<TEntity, T>> predicate, T value);
-        IEntityUpdate<TEntity> Set<T>(Expression<Func<TEntity, T>> predicate, Expression<Func<TEntity, T>> expr);
-    }
 
     class EntityUpdate<TEntity> : IEntityUpdate<TEntity>
     {
         ITableSource _mainTable;
-        EntityRepository _repo;
-        public EntityRepository Repository
+        IRepository _repo;
+        public IRepository Repository
         {
             get { return _repo; }
         }
@@ -48,6 +36,7 @@ namespace Css.Domain
         SimplePropertyFinder PropertyFinder { get; }
         public EntityUpdate(EntityRepository repo)
         {
+            Debug.Assert(repo is IDbRepository, "仓库必须是IDbRepository");
             _repo = repo;
             _mainTable = QueryFactory.Instance.Table(_repo);
             PropertyFinder = new SimplePropertyFinder(_repo);
@@ -59,9 +48,10 @@ namespace Css.Domain
             var expression = Evaluator.PartialEval(Expression);
             var where = new EntityConditionBuilder(_repo).Build(expression);
             var args = new ExecuteArgs(ExecuteType.Update, _mainTable as SqlTable, where as ISqlConstraint, Columns);
-            using(var dba = _repo.CreateDbAccesser())
+            var repo = _repo as IDbRepository;
+            using (var dba = repo.CreateDbAccesser())
             {
-                return _repo.DbTable.Execute(dba, args);
+                return repo.DbTable.Execute(dba, args);
             }
         }
 

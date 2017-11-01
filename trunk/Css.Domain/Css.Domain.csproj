@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../Css.snk</AssemblyOriginatorKeyFile>
+    <Company>www.CSharpStudio.org</Company>
+    <Copyright>Copyright 2018</Copyright>
+    <RepositoryUrl>https://github.com/CSharpStudio/Data.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/CSharpStudio/Data</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

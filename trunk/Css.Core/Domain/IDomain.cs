@@ -9,7 +9,7 @@ namespace Css.Domain
 {
     public interface IDomain
     {
-        void SetRefParent(Entity entity);
+        void SetRefParent(IEntity entity);
 
         /// <summary>
         /// Returns <see cref="IRepository"/> for the entity. Each type of entity has a singleton repository.

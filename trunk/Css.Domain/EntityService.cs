@@ -19,7 +19,7 @@ namespace Css.Domain
             domain.GetRepository().Save(domain);
         }
 
-        public virtual Entity GetById(Type entityType, object id)
+        public virtual IEntity GetById(Type entityType, object id)
         {
             return RF.Find(entityType).GetById(id);
         }
@@ -47,6 +47,7 @@ namespace Css.Domain
             var repo = RF.Find<T>();
             return new EntityUpdate<T>(repo);
         }
+
         /// <summary>
         /// 批量删除
         /// <para>

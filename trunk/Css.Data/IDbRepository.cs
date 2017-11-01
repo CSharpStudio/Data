@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Css.Data.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,5 +11,7 @@ namespace Css.Data
     public interface IDbRepository
     {
         DbSetting DbSetting { get; }
+        IDbAccesser CreateDbAccesser();
+        DbTable DbTable { get; }
     }
 }

@@ -68,6 +68,6 @@ namespace Css.Domain
     /// </summary>
     public interface IRefEntityProperty : IRefProperty
     {
-        Entity Load(object id, Entity owner);
+        IEntity Load(object id, IEntity owner);
     }
 }

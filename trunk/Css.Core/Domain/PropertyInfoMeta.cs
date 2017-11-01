@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Css.Domain.Metadata
+namespace Css.Domain
 {
+    /// <summary>
+    /// 属性信息元数据
+    /// </summary>
     public class PropertyInfoMeta
     {
         /// <summary>
@@ -19,9 +22,10 @@ namespace Css.Domain.Metadata
         /// </summary>
         public Type PropertyType { get; set; }
 
+        /// <summary>
+        /// 属性声明类型
+        /// </summary>
         public Type DeclareType { get; set; }
-
-        public PropertyCategory Category { get; set; }
 
         /// <summary>
         /// 是否需要序列化

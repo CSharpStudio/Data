@@ -11,6 +11,8 @@
     <RepositoryUrl>https://github.com/CSharpStudio/Data.git</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/CSharpStudio/Data/master/CSharpStudio.png</PackageIconUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../Css.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

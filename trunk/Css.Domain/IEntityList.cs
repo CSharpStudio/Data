@@ -11,7 +11,7 @@ namespace Css.Domain
     {
         Type EntityType { get; }
 
-        void SyncParentEntityId(Entity id);
+        void SyncParentEntityId(IEntity id);
 
         IList Deleted { get; }
 

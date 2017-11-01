@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Css.Domain.Metadata
+namespace Css.Domain
 {
+    /// <summary>
+    /// 实体元数据仓库
+    /// </summary>
     public class EntityMetaRepository
     {
         public static EntityMetaRepository Instance = new EntityMetaRepository();
@@ -37,8 +40,6 @@ namespace Css.Domain.Metadata
         public EntityMeta Find(Type entityType)
         {
             Check.NotNull(entityType, nameof(entityType));
-            if (!entityType.IsSubclassOf(typeof(Entity)))
-                throw new ArgumentException("类型[{0}]没有继承自Entity,不支持实体元数据");
             EntityMeta meta = null;
             if (!_meta.TryGetValue(entityType, out meta))
             {
@@ -46,7 +47,10 @@ namespace Css.Domain.Metadata
                 {
                     if (!_meta.TryGetValue(entityType, out meta))
                     {
-                        meta = FindOrCreate(entityType);
+                        meta = RT.Service.Resolve<IEntityMetaCreator>().Create(entityType);
+                        OnEntityMetaCreated(meta);
+                        Config(meta);
+                        OnEntityMetaConfigured(meta);
                         _meta.Add(entityType, meta);
                     }
                 }
@@ -54,27 +58,17 @@ namespace Css.Domain.Metadata
             return meta;
         }
 
+        /// <summary>
+        /// 注册实体的信息
+        /// </summary>
+        /// <param name="entityType"></param>
+        /// <param name="meta"></param>
         public void Register(Type entityType, EntityMeta meta)
         {
-            _meta.Add(entityType, meta);
-        }
-
-        EntityMeta FindOrCreate(Type entityType)
-        {
-            var entityMeta = new EntityMeta();
-            entityMeta.EntityType = entityType;
-            var propertyContainer = VarTypeRepository.Instance.GetVarPropertyContainer(entityType);
-            foreach (var property in propertyContainer.Properties.OfType<IProperty>())
+            lock (_syncLock)
             {
-                if (property is IListProperty)
-                    entityMeta.ChildrenProperties.Add(CreateProperty(entityMeta, (IListProperty)property));
-                else if (!(property is IRefEntityProperty))
-                    entityMeta.Properties.Add(CreateProperty(entityMeta, property));
+                _meta.Add(entityType, meta);
             }
-            OnEntityMetaCreated(entityMeta);
-            Config(entityMeta);
-            OnEntityMetaConfigured(entityMeta);
-            return entityMeta;
         }
 
         Dictionary<Type, List<IEntityConfig>> _typeConfigurations;
@@ -115,7 +109,7 @@ namespace Css.Domain.Metadata
         /// <param name="em"></param>
         void Config(EntityMeta em)
         {
-            var hierachy = em.EntityType.GetHierarchy(typeof(VarObject)).Reverse();
+            var hierachy = em.EntityType.GetHierarchy(typeof(object)).Reverse();
             foreach (var type in hierachy)
             {
                 List<IEntityConfig> configList = null;
@@ -131,45 +125,6 @@ namespace Css.Domain.Metadata
                     }
                 }
             }
-        }
-
-        protected virtual PropertyMeta CreateProperty(EntityMeta owner, IProperty property)
-        {
-            if (property is IRefIdProperty)
-                return CreateProperty(owner, (IRefIdProperty)property);
-            var meta = new PropertyMeta();
-            LoadPropertyMeta(owner, meta, property);
-            meta.IsReadonly = property.IsReadOnly;
-            return meta;
-        }
-
-        protected virtual RefPropertyMeta CreateProperty(EntityMeta owner, IRefIdProperty property)
-        {
-            var meta = new RefPropertyMeta();
-            LoadPropertyMeta(owner, meta, property);
-            meta.ReferenceType = property.ReferenceType;
-            meta.RefProperty = new PropertyInfoMeta();
-            LoadPropertyMeta(owner, meta.RefProperty, property.RefEntityProperty);
-            meta.Nullable = property.Nullable;
-            return meta;
-        }
-
-        protected virtual void LoadPropertyMeta(EntityMeta owner, PropertyInfoMeta meta, IProperty property)
-        {
-            meta.Owner = owner;
-            meta.Category = property.Category;
-            meta.PropertyName = property.Name;
-            meta.PropertyType = property.PropertyType;
-            meta.DeclareType = property.DeclareType;
-            meta.Serializable = property.Serializable;
-        }
-
-        protected virtual ChildPropertyMeta CreateProperty(EntityMeta owner, IListProperty property)
-        {
-            var meta = new ChildPropertyMeta();
-            LoadPropertyMeta(owner, meta, property);
-            meta.HasManyType = property.HasManyType;
-            return meta;
         }
     }
 }

@@ -7,6 +7,7 @@ using Css.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -61,9 +62,11 @@ namespace Css.Domain
         {
             NewExpression newExpression;
             var query = queryer.ToQuery(out newExpression);
-            using (var dba = queryer.Repository.CreateDbAccesser())
+            IDbRepository repo = queryer.Repository as IDbRepository;
+            Debug.Assert(repo != null, "仓库必须实现IDbRepository");
+            using (var dba = repo.CreateDbAccesser())
             {
-                var generator = queryer.Repository.DbTable.CreateSqlGenerator();
+                var generator = repo.DbTable.CreateSqlGenerator();
                 generator.Generate(query as TableQuery);
                 using (var reader = dba.ExecuteReader(generator.Sql, dba.Connection.State == ConnectionState.Closed, generator.Sql.Parameters))
                 {
@@ -94,9 +97,11 @@ namespace Css.Domain
                 action = r => result.Add((T)r.ToObject(newExpression));
             else
                 action = r => result.Add(r.ToObject<T>());
-            using (var dba = queryer.Repository.CreateDbAccesser())
+            IDbRepository repo = queryer.Repository as IDbRepository;
+            Debug.Assert(repo != null, "仓库必须实现IDbRepository");
+            using (var dba = repo.CreateDbAccesser())
             {
-                var generator = queryer.Repository.DbTable.CreateSqlGenerator();
+                var generator = repo.DbTable.CreateSqlGenerator();
                 generator.Generate(query as TableQuery, queryer.Start, queryer.End);
                 using (var reader = dba.ExecuteReader(generator.Sql, dba.Connection.State == ConnectionState.Closed, generator.Sql.Parameters))
                 {

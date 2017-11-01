@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Css.Data;
 
-namespace Css.Domain.Metadata
+namespace Css.Domain
 {
+    /// <summary>
+    /// 属性元数据
+    /// </summary>
     public class PropertyMeta : PropertyInfoMeta
     {
         /// <summary>

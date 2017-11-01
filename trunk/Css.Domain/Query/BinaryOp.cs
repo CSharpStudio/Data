@@ -7,31 +7,6 @@ using System.Threading.Tasks;
 
 namespace Css.Domain.Query
 {
-    /// <summary>
-    /// 属性的对比操作符
-    /// </summary>
-    public enum BinaryOp
-    {
-        Equal = SqlBinaryOperator.Equal,
-        NotEqual = SqlBinaryOperator.NotEqual,
-        Greater = SqlBinaryOperator.Greater,
-        GreaterEqual = SqlBinaryOperator.GreaterEqual,
-        Less = SqlBinaryOperator.Less,
-        LessEqual = SqlBinaryOperator.LessEqual,
-
-        Like = SqlBinaryOperator.Like,
-        NotLike = SqlBinaryOperator.NotLike,
-        Contains = SqlBinaryOperator.Contains,
-        NotContains = SqlBinaryOperator.NotContains,
-        StartsWith = SqlBinaryOperator.StartsWith,
-        NotStartsWith = SqlBinaryOperator.NotStartsWith,
-        EndsWith = SqlBinaryOperator.EndsWith,
-        NotEndsWith = SqlBinaryOperator.NotEndsWith,
-
-        In = SqlBinaryOperator.In,
-        NotIn = SqlBinaryOperator.NotIn,
-    }
-
     internal class BinaryOperatorHelper
     {
         public static BinaryOp Reverse(BinaryOp op)

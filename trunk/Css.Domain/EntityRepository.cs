@@ -2,11 +2,11 @@
 using Css.Data;
 using Css.Data.Common;
 using Css.Diagnostics;
-using Css.Domain.Metadata;
 using Css.Domain.Query;
 using Css.Domain.Query.Impl;
 using Css.Domain.Query.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,13 +16,13 @@ using System.Threading.Tasks;
 
 namespace Css.Domain
 {
-    public abstract class EntityRepository : IRepository, IDbRepository
+    public abstract class EntityRepository : IEntityRepository, IDbRepository
     {
         /// <summary>
         /// 这个字段用于存储运行时解析出来的 ORM 信息。
         /// </summary>
         DbTable _dbTable;
-        protected internal DbTable DbTable
+        public DbTable DbTable
         {
             get { return _dbTable ?? (_dbTable = DbProvider.CreateTable(DbSetting, TableInfo)); }
         }
@@ -41,7 +41,7 @@ namespace Css.Domain
         ITableInfo _tableInfo;
         public ITableInfo TableInfo
         {
-            get { return _tableInfo ?? (_tableInfo = EntityMeta.CreateTableInfo()); }
+            get { return _tableInfo ?? (_tableInfo = Mapping.TableInfo.Create(EntityMeta)); }
         }
 
         public abstract Type EntityType { get; }
@@ -64,7 +64,7 @@ namespace Css.Domain
             return DbAccesserFactory.Create(DbSetting);
         }
 
-        public virtual Entity GetById(object id)
+        public virtual IEntity GetById(object id)
         {
             var f = QueryFactory.Instance;
             var table = f.Table(this);
@@ -76,7 +76,7 @@ namespace Css.Domain
             return FirstOrDefault(query);
         }
 
-        public virtual IEntityList GetByParentId(object parentId)
+        public virtual IList GetByParentId(object parentId)
         {
             var f = QueryFactory.Instance;
             var parentProperty = EntityMeta.FindParentProperty();
@@ -221,7 +221,7 @@ namespace Css.Domain
 
         IRefEntityProperty _parentProperty;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        IRefEntityProperty IRepository.ParentProperty
+        IRefEntityProperty IEntityRepository.ParentProperty
         {
             get
             {
@@ -240,14 +240,14 @@ namespace Css.Domain
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        IProperty IRepository.FindProperty(string propertyName)
+        IProperty IEntityRepository.FindProperty(string propertyName)
         {
             return PropertyContainer.Properties.FirstOrDefault(p => p.Name == propertyName) as IProperty;
         }
 
         IList<IProperty> _childProperties;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        IList<IProperty> IRepository.GetChildProperties()
+        IList<IProperty> IEntityRepository.GetChildProperties()
         {
             if (_childProperties == null)
             {
@@ -279,7 +279,7 @@ namespace Css.Domain
             }
         }
 
-        public IEntityList ToList(IQuery query, int start = 0, int end = 0)
+        public IList ToList(IQuery query, int start = 0, int end = 0)
         {
             using (var dba = CreateDbAccesser())
             {
@@ -302,7 +302,7 @@ namespace Css.Domain
             }
         }
 
-        public Entity FirstOrDefault(IQuery query)
+        public IEntity FirstOrDefault(IQuery query)
         {
             using (var dba = CreateDbAccesser())
             {

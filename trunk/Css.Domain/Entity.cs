@@ -284,7 +284,7 @@ namespace Css.Domain
         /// <param name="entityProperty">The entity property.</param>
         /// <param name="value">The value.</param>
         /// <param name="source">The source.</param>
-        public void SetRefEntity(Entity value, IRefEntityProperty entityProperty)
+        public void SetRefEntity(IEntity value, IRefEntityProperty entityProperty)
         {
             Check.NotNull(entityProperty, nameof(entityProperty));
             var oldEntity = base.GetValue(entityProperty) as Entity;
@@ -436,7 +436,7 @@ namespace Css.Domain
             return _repository ?? (_repository = RepositoryFactory.Find(GetType()));
         }
 
-        public void SetRefParent(Entity parent)
+        public void SetRefParent(IEntity parent)
         {
             var property = GetRepository().GetParentProperty();
             SetRefEntity(parent, property);
@@ -474,7 +474,7 @@ namespace Css.Domain
             internal LoadedChildrenEnumerator(Entity entity)
             {
                 _entity = entity;
-                var repo = entity.GetRepository();
+                var repo = entity.GetRepository() as IEntityRepository;
                 _childProperties = repo.GetChildProperties();
                 _index = -1;
                 _current = new ChildPropertyField();

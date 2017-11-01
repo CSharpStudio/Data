@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Css.Domain.Metadata
+namespace Css.Domain
 {
     public class ChildPropertyMeta : PropertyInfoMeta
     {
