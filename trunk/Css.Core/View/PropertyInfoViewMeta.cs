@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Css.View
 {
-    public class PropertyViewMeta : PropertyInfoViewMeta 
+    public class PropertyInfoViewMeta : Extensible
     {
     }
 }

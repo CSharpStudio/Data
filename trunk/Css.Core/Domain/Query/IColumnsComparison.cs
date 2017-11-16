@@ -1,4 +1,6 @@
-﻿namespace Css.Domain.Query
+﻿using Css.Data;
+
+namespace Css.Domain.Query
 {
     /// <summary>
     /// 两个列进行对比的约束条件节点

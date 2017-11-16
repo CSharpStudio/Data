@@ -160,7 +160,7 @@ WHERE RN >= " + startRow)
                 newConstraint = new SqlGroupConstraint
                 {
                     Left = old,
-                    Opeartor = SqlGroupOperator.And,
+                    Opeartor = GroupOp.And,
                     Right = newConstraint
                 };
             }

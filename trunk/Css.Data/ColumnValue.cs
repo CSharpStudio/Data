@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Css.Data
 {
     /// <summary>
-    /// 排序方向。
+    /// 列值
     /// </summary>
-    public enum OrderDirection
+    public class ColumnValue : IColumnValue
     {
         /// <summary>
-        /// 正序排列。
+        /// 属性名
         /// </summary>
-        Ascending,
+        public string PropertyName { get; set; }
+
         /// <summary>
-        /// 反序排列。
+        /// 属性值
         /// </summary>
-        Descending
+        public object Value { get; set; }
     }
 }

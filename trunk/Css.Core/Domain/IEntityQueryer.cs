@@ -7,7 +7,7 @@ using System.Reflection;
 namespace Css.Domain
 {
     /// <summary>
-    /// 实体查询
+    /// 实体<see cref="IEntity"/>查询操作接口
     /// </summary>
     public interface IEntityQueryer
     {
@@ -23,13 +23,21 @@ namespace Css.Domain
         /// 主表别名
         /// </summary>
         string Alias { get; set; }
-
+        /// <summary>
+        /// 分页开始数
+        /// </summary>
         int Start { get; }
-
+        /// <summary>
+        /// 分页结束数
+        /// </summary>
         int End { get; }
-
+        /// <summary>
+        /// Where标准条件
+        /// </summary>
         CriteriaOperator WhereCriteria { get; }
-
+        /// <summary>
+        /// Having标准条件
+        /// </summary>
         CriteriaOperator HavingCriteria { get; }
     }
 

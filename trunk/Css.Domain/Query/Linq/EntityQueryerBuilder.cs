@@ -2,6 +2,7 @@
 using Css.Domain.Query.Impl;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -146,7 +147,7 @@ namespace Css.Domain.Query.Linq
             _query.From = f.Join(_query.From, table, _constraint, joinType);
         }
 
-        void VisitOrderBy(Expression epxr, OrderDirection dir)
+        void VisitOrderBy(Expression epxr, ListSortDirection dir)
         {
             var orderBy = new SelectionVisitor(_allTables, PropertyFinder);
             orderBy.Visit(epxr);
@@ -191,10 +192,10 @@ namespace Css.Domain.Query.Linq
                     _query.Having = f.And(_query.Having, _constraint);
                     break;
                 case LinqMethods.OrderBy:
-                    VisitOrderBy(lambda.Body, OrderDirection.Ascending);
+                    VisitOrderBy(lambda.Body, ListSortDirection.Ascending);
                     break;
                 case LinqMethods.OrderByDescending:
-                    VisitOrderBy(lambda.Body, OrderDirection.Descending);
+                    VisitOrderBy(lambda.Body, ListSortDirection.Descending);
                     break;
                 case LinqMethods.GroupBy:
                     var groupBy = new SelectionVisitor(_allTables, PropertyFinder);

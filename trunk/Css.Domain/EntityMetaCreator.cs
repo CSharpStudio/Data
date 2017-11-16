@@ -39,13 +39,13 @@ namespace Css.Domain
             var meta = new RefPropertyMeta();
             LoadPropertyMeta(owner, meta, property);
             meta.ReferenceType = property.ReferenceType;
-            meta.RefProperty = new PropertyInfoMeta();
+            meta.RefProperty = new PropertyMetadata();
             LoadPropertyMeta(owner, meta.RefProperty, property.RefEntityProperty);
             meta.Nullable = property.Nullable;
             return meta;
         }
 
-        protected virtual void LoadPropertyMeta(EntityMeta owner, PropertyInfoMeta meta, IProperty property)
+        protected virtual void LoadPropertyMeta(EntityMeta owner, PropertyMetadata meta, IProperty property)
         {
             meta.Owner = owner;
             meta.PropertyName = property.Name;

@@ -21,12 +21,6 @@ namespace Css.Domain.Query.Impl
             set { base.Right = value as SqlNode; }
         }
 
-        BinaryOp IBinaryConstraint.Operator
-        {
-            get { return (BinaryOp)base.Operator; }
-            set { base.Operator = (SqlBinaryOperator)value; }
-        }
-
         QueryNodeType IQueryNode.NodeType
         {
             get { return QueryNodeType.BinaryConstraint; }

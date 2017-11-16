@@ -4,6 +4,7 @@ using Css.Domain.Query.Impl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Css.Domain.Query
 {
@@ -569,7 +570,7 @@ namespace Css.Domain.Query
         /// <param name="direction">使用这个方向进行排序。</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">property</exception>
-        public IOrderBy OrderBy(IColumnNode property, OrderDirection direction = OrderDirection.Ascending)
+        public IOrderBy OrderBy(IColumnNode property, ListSortDirection direction = ListSortDirection.Ascending)
         {
             Check.NotNull(property, nameof(property));
 

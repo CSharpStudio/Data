@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Css.ComponentModel;
+using System;
 
 namespace Css.Domain
 {
     /// <summary>
-    /// 属性信息元数据
+    /// 属性信息元数据，继承自<see cref="Extensible"/>
     /// </summary>
-    public class PropertyInfoMeta
+    public class PropertyMetadata : Extensible
     {
         /// <summary>
         /// 属性名称
@@ -33,7 +29,7 @@ namespace Css.Domain
         public bool Serializable { get; set; }
 
         /// <summary>
-        /// 属性所有者的元数据
+        /// 属性所有者<see cref="IEntity"/>的元数据
         /// </summary>
         public EntityMeta Owner { get; set; }
     }

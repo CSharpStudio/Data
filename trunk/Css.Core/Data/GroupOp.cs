@@ -1,4 +1,4 @@
-﻿namespace Css.Domain.Query
+﻿namespace Css.Data
 {
     /// <summary>
     /// 二位运算类型

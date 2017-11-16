@@ -8,22 +8,29 @@ using System.Threading.Tasks;
 
 namespace Css.Domain
 {
-    public class EntityMeta
+    /// <summary>
+    /// 实体元数据，映射数据库的信息，继承自<see cref="Extensible"/>
+    /// </summary>
+    public class EntityMeta : Extensible
     {
         /// <summary>
-        /// 当前模型是对应这个类型的。
+        /// 实体<see cref="IEntity"/>类型。
         /// </summary>
         public Type EntityType { get; set; }
 
+        /// <summary>
+        /// 表元数据
+        /// </summary>
         public TableMeta TableMeta { get; set; }
 
+        /// <summary>
+        /// 属性元数据列表
+        /// </summary>
         public IList<PropertyMeta> Properties { get; } = new List<PropertyMeta>();
 
+        /// <summary>
+        /// 子属性元数据列表
+        /// </summary>
         public IList<ChildPropertyMeta> ChildrenProperties { get; } = new List<ChildPropertyMeta>();
-
-        public RefPropertyMeta FindParentProperty()
-        {
-            return Properties.OfType<RefPropertyMeta>().FirstOrDefault(p => p.ReferenceType == ReferenceType.Parent);
-        }
     }
 }

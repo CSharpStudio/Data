@@ -30,7 +30,7 @@ namespace Css.Data.SqlTree
         /// <summary>
         /// 二位运算类型
         /// </summary>
-        public SqlGroupOperator Opeartor { get; set; }
+        public GroupOp Opeartor { get; set; }
 
         /// <summary>
         /// 二位运算的右操作节点。

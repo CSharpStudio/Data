@@ -329,6 +329,36 @@ namespace Css.Domain
                 column.SetPropertyValue(entity, value);
             }
         }
+
+        public Task<IEntity> GetByIdAsync(object id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveAsync(IDomain entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountAsync(IQuery query)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEntityList IRepository.ToList(IQuery query, int start, int end)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEntityList> ToListAsync(IQuery query, int start, int end)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEntity> FirstOrDefaultAsync(IQuery query)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class EntityRepository<T> : EntityRepository where T : Entity

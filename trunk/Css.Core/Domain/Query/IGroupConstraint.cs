@@ -1,4 +1,6 @@
-﻿namespace Css.Domain.Query
+﻿using Css.Data;
+
+namespace Css.Domain.Query
 {
     /// <summary>
     /// 二位操作符连接的节点

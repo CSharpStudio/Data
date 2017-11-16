@@ -1,4 +1,4 @@
-﻿namespace Css.Domain
+﻿namespace Css.Data
 {
     /// <summary>
     /// 属性的对比操作符

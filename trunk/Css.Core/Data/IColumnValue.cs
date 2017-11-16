@@ -6,23 +6,19 @@ using System.Threading.Tasks;
 
 namespace Css.Data
 {
+    /// <summary>
+    /// 列值
+    /// </summary>
     public interface IColumnValue
     {
         /// <summary>
-        /// 列
+        /// 属性名
         /// </summary>
         string PropertyName { get; set; }
 
         /// <summary>
-        /// 值
+        /// 属性值
         /// </summary>
         object Value { get; set; }
-    }
-
-    public class ColumnValue : IColumnValue
-    {
-        public string PropertyName { get; set; }
-
-        public object Value { get; set; }
     }
 }

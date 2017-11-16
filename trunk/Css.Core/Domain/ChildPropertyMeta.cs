@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Css.Domain
 {
-    public class ChildPropertyMeta : PropertyInfoMeta
+    /// <summary>
+    /// 子属性元数据，表示聚合或组合子的属性
+    /// </summary>
+    public class ChildPropertyMeta : PropertyMetadata
     {
         /// <summary>
         /// 一对多属性的类型(聚合、组合)

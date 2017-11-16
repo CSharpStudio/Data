@@ -113,7 +113,7 @@ namespace Css.Data.SqlClient
             var newWhere = new SqlBinaryConstraint
             {
                 Left = pkColumn,
-                Operator = SqlBinaryOperator.NotIn,
+                Operator = BinaryOp.NotIn,
                 Right = excludeSelect
             };
             if (raw.Where != null)
@@ -121,7 +121,7 @@ namespace Css.Data.SqlClient
                 res.Where = new SqlGroupConstraint
                 {
                     Left = raw.Where,
-                    Opeartor = SqlGroupOperator.And,
+                    Opeartor = GroupOp.And,
                     Right = newWhere
                 };
             }

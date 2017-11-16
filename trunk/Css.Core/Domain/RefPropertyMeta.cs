@@ -13,7 +13,7 @@
         /// <summary>
         /// 引用
         /// </summary>
-        public PropertyInfoMeta RefProperty { get; set; }
+        public PropertyMetadata RefProperty { get; set; }
 
         /// <summary>
         /// 是否可空

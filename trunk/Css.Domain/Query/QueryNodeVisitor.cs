@@ -1,4 +1,5 @@
-﻿using Css.Domain.Query.Impl;
+﻿using Css.Data;
+using Css.Domain.Query.Impl;
 using System;
 
 namespace Css.Domain.Query

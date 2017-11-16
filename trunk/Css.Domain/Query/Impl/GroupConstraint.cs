@@ -16,18 +16,6 @@ namespace Css.Domain.Query.Impl
             }
         }
 
-        GroupOp IGroupConstraint.Opeartor
-        {
-            get
-            {
-                return (GroupOp)base.Opeartor;
-            }
-            set
-            {
-                base.Opeartor = (SqlGroupOperator)value;
-            }
-        }
-
         IConstraint IGroupConstraint.Right
         {
             get

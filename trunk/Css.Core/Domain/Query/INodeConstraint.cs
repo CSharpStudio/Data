@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Css.Data;
 
 namespace Css.Domain.Query
 {
@@ -16,7 +12,12 @@ namespace Css.Domain.Query
         /// <summary>
         /// 对比操作符
         /// </summary>
-        BinaryOp Operator { get; set; }
+        BinaryOp GetOperator();
+
+        /// <summary>
+        /// 对比操作符
+        /// </summary>
+        void SetOperator(BinaryOp value);
 
         /// <summary>
         /// 要对比的值。

@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -121,14 +122,14 @@ namespace Css.Data.Common
                 Left = new SqlBinaryConstraint
                 {
                     Left = rowNumberColumn,
-                    Operator = SqlBinaryOperator.GreaterEqual,
+                    Operator = BinaryOp.GreaterEqual,
                     Right = new SqlValue { Value = startRow }
                 },
-                Opeartor = SqlGroupOperator.And,
+                Opeartor = GroupOp.And,
                 Right = new SqlBinaryConstraint
                 {
                     Left = rowNumberColumn,
-                    Operator = SqlBinaryOperator.LessEqual,
+                    Operator = BinaryOp.LessEqual,
                     Right = new SqlValue { Value = endRow }
                 }
             };
@@ -181,14 +182,14 @@ namespace Css.Data.Common
             return sqlLiteral;
         }
 
-        protected override SqlGroupOperator VisitGroupOperator(SqlGroupOperator op)
+        protected override GroupOp VisitGroupOperator(GroupOp op)
         {
             switch (op)
             {
-                case SqlGroupOperator.And:
+                case GroupOp.And:
                     _sql.AppendAnd();
                     break;
-                case SqlGroupOperator.Or:
+                case GroupOp.Or:
                     _sql.AppendOr();
                     break;
                 default:
@@ -199,12 +200,12 @@ namespace Css.Data.Common
 
         protected override SqlGroupConstraint VisitSqlGroupConstraint(SqlGroupConstraint node)
         {
-            if (node.Opeartor == SqlGroupOperator.And)
+            if (node.Opeartor == GroupOp.And)
             {
                 var leftBinary = node.Left as SqlGroupConstraint;
                 var rightBinary = node.Right as SqlGroupConstraint;
-                var isLeftOr = leftBinary != null && leftBinary.Opeartor == SqlGroupOperator.Or;
-                var isRightOr = rightBinary != null && rightBinary.Opeartor == SqlGroupOperator.Or;
+                var isLeftOr = leftBinary != null && leftBinary.Opeartor == GroupOp.Or;
+                var isRightOr = rightBinary != null && rightBinary.Opeartor == GroupOp.Or;
 
                 if (isLeftOr) _sql.Append("(");
                 Visit(node.Left);
@@ -377,26 +378,26 @@ namespace Css.Data.Common
             return sqlArray;
         }
 
-        protected override SqlBinaryOperator VisitBinaryOperator(SqlBinaryOperator op)
+        protected override BinaryOp VisitBinaryOperator(BinaryOp op)
         {
             switch (op)
             {
-                case SqlBinaryOperator.Equal: _sql.Append(" = "); break;
-                case SqlBinaryOperator.NotEqual: _sql.Append(" != "); break;
-                case SqlBinaryOperator.Greater: _sql.Append(" > "); break;
-                case SqlBinaryOperator.GreaterEqual: _sql.Append(" >= "); break;
-                case SqlBinaryOperator.Less: _sql.Append(" < "); break;
-                case SqlBinaryOperator.LessEqual: _sql.Append(" <= "); break;
-                case SqlBinaryOperator.Like:
-                case SqlBinaryOperator.Contains:
-                case SqlBinaryOperator.StartsWith:
-                case SqlBinaryOperator.EndsWith: _sql.Append(" LIKE "); break;
-                case SqlBinaryOperator.NotLike:
-                case SqlBinaryOperator.NotContains:
-                case SqlBinaryOperator.NotStartsWith:
-                case SqlBinaryOperator.NotEndsWith: _sql.Append(" NOT LIKE "); break;
-                case SqlBinaryOperator.In: _sql.Append(" IN "); break;
-                case SqlBinaryOperator.NotIn: _sql.Append(" NOT IN "); break;
+                case BinaryOp.Equal: _sql.Append(" = "); break;
+                case BinaryOp.NotEqual: _sql.Append(" != "); break;
+                case BinaryOp.Greater: _sql.Append(" > "); break;
+                case BinaryOp.GreaterEqual: _sql.Append(" >= "); break;
+                case BinaryOp.Less: _sql.Append(" < "); break;
+                case BinaryOp.LessEqual: _sql.Append(" <= "); break;
+                case BinaryOp.Like:
+                case BinaryOp.Contains:
+                case BinaryOp.StartsWith:
+                case BinaryOp.EndsWith: _sql.Append(" LIKE "); break;
+                case BinaryOp.NotLike:
+                case BinaryOp.NotContains:
+                case BinaryOp.NotStartsWith:
+                case BinaryOp.NotEndsWith: _sql.Append(" NOT LIKE "); break;
+                case BinaryOp.In: _sql.Append(" IN "); break;
+                case BinaryOp.NotIn: _sql.Append(" NOT IN "); break;
             }
             return op;
         }
@@ -407,8 +408,8 @@ namespace Css.Data.Common
             var isNullValue = IsNullValue(node.Right);
             switch (op)
             {
-                case SqlBinaryOperator.Contains:
-                case SqlBinaryOperator.NotContains:
+                case BinaryOp.Contains:
+                case BinaryOp.NotContains:
                     if (isNullValue)
                     {
                         _sql.Append("1 = 1");
@@ -426,7 +427,7 @@ namespace Css.Data.Common
                             if (value.IndexOfAny(new[] { '_', '%' }) == -1)
                             {
                                 _sql.Append(" ");
-                                if (op == SqlBinaryOperator.NotContains)
+                                if (op == BinaryOp.NotContains)
                                     _sql.Append("!");
                                 _sql.Append("= ");
                             }
@@ -440,7 +441,7 @@ namespace Css.Data.Common
                                 if (v.IndexOfAny(new[] { '_', '%' }) == -1)
                                 {
                                     _sql.Append(" ");
-                                    if (op == SqlBinaryOperator.NotContains)
+                                    if (op == BinaryOp.NotContains)
                                         _sql.Append("!");
                                     _sql.Append("= ");
                                 }
@@ -455,7 +456,7 @@ namespace Css.Data.Common
                         {
                             Visit(node.Left);
                             _sql.Append(" ");
-                            if (op == SqlBinaryOperator.NotContains)
+                            if (op == BinaryOp.NotContains)
                                 _sql.Append("!");
                             _sql.Append("= ");
                             Visit(node.Right);
@@ -463,9 +464,9 @@ namespace Css.Data.Common
                         }
                     }
                     break;
-                case SqlBinaryOperator.Like:
-                case SqlBinaryOperator.StartsWith:
-                case SqlBinaryOperator.EndsWith:
+                case BinaryOp.Like:
+                case BinaryOp.StartsWith:
+                case BinaryOp.EndsWith:
                     //如果是空字符串的模糊对比操作，直接认为是真。
                     if (isNullValue)
                     {
@@ -473,9 +474,9 @@ namespace Css.Data.Common
                         return true;
                     }
                     break;
-                case SqlBinaryOperator.NotLike:
-                case SqlBinaryOperator.NotStartsWith:
-                case SqlBinaryOperator.NotEndsWith:
+                case BinaryOp.NotLike:
+                case BinaryOp.NotStartsWith:
+                case BinaryOp.NotEndsWith:
                     //如果是空字符串的模糊对比操作，直接认为是假。
                     if (isNullValue)
                     {
@@ -483,12 +484,12 @@ namespace Css.Data.Common
                         return true;
                     }
                     break;
-                case SqlBinaryOperator.In:
-                case SqlBinaryOperator.NotIn:
+                case BinaryOp.In:
+                case BinaryOp.NotIn:
                     //对于 In、NotIn 操作，如果传入的是空列表时，需要特殊处理: In(Empty) 表示 false，NotIn(Empty) 表示 true。
                     if (IsEmptyArray(node.Right))
                     {
-                        _sql.Append(op == SqlBinaryOperator.In ? "0 = 1" : "1 = 1");
+                        _sql.Append(op == BinaryOp.In ? "0 = 1" : "1 = 1");
                         return true;
                     }
                     break;
@@ -516,8 +517,8 @@ namespace Css.Data.Common
                 {
                     switch (op)
                     {
-                        case SqlBinaryOperator.Equal: _sql.Append(" IS NULL"); return node;
-                        case SqlBinaryOperator.NotEqual: _sql.Append(" IS NOT NULL"); return node;
+                        case BinaryOp.Equal: _sql.Append(" IS NULL"); return node;
+                        case BinaryOp.NotEqual: _sql.Append(" IS NOT NULL"); return node;
                     }
                 }
 
@@ -528,20 +529,20 @@ namespace Css.Data.Common
                     var value = ((SqlValue)node.Right).Value;
                     switch (op)
                     {
-                        case SqlBinaryOperator.StartsWith:
-                        case SqlBinaryOperator.NotStartsWith:
+                        case BinaryOp.StartsWith:
+                        case BinaryOp.NotStartsWith:
                             _sql.AppendParameter(Escape(value) + WILDCARD_ALL);
                             AppendEscapePlause(value);
                             return node;
-                        case SqlBinaryOperator.EndsWith:
-                        case SqlBinaryOperator.NotEndsWith:
+                        case BinaryOp.EndsWith:
+                        case BinaryOp.NotEndsWith:
                             _sql.AppendParameter(WILDCARD_ALL + Escape(value));
                             AppendEscapePlause(value);
                             return node;
                     }
                 }
 
-                if (op == SqlBinaryOperator.In || op == SqlBinaryOperator.NotIn)
+                if (op == BinaryOp.In || op == BinaryOp.NotIn)
                 {
                     _sql.Append("(");
                     if (node.Right is SqlArray)
@@ -559,7 +560,7 @@ namespace Css.Data.Common
 
                 Visit(node.Right);
 
-                if (op == SqlBinaryOperator.In || op == SqlBinaryOperator.NotIn)
+                if (op == BinaryOp.In || op == BinaryOp.NotIn)
                 {
                     if (!(node.Right is SqlArray))
                     {
@@ -675,7 +676,7 @@ namespace Css.Data.Common
         {
             AppendColumnUsage(sqlOrderBy.Column);
             _sql.Append(" ");
-            _sql.Append(sqlOrderBy.Direction == OrderDirection.Ascending ? "ASC" : "DESC");
+            _sql.Append(sqlOrderBy.Direction == ListSortDirection.Ascending ? "ASC" : "DESC");
 
             return sqlOrderBy;
         }

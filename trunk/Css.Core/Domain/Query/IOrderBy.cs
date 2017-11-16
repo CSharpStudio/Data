@@ -1,4 +1,5 @@
 ﻿using Css.Data;
+using System.ComponentModel;
 
 namespace Css.Domain.Query
 {
@@ -15,6 +16,6 @@ namespace Css.Domain.Query
         /// <summary>
         /// 使用这个方向进行排序。
         /// </summary>
-        OrderDirection Direction { get; set; }
+        ListSortDirection Direction { get; set; }
     }
 }

@@ -403,24 +403,7 @@ namespace Css.Domain
         }
 
         #endregion
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        string IDataErrorInfo.Error
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        string IDataErrorInfo.this[string columnName]
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
+        
         /// <summary>
         /// 实体对应的仓库。
         /// </summary>

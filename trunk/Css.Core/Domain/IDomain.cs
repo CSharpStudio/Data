@@ -1,18 +1,14 @@
-﻿using Css.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Css.Domain
+﻿namespace Css.Domain
 {
+    /// <summary>
+    /// 领域接口，实体<see cref="IEntity"/>和实体列表<see cref="IEntityList"/>都属于领域范畴。
+    /// </summary>
     public interface IDomain
     {
         void SetRefParent(IEntity entity);
 
         /// <summary>
-        /// Returns <see cref="IRepository"/> for the entity. Each type of entity has a singleton repository.
+        /// 获取领域的仓库 <see cref="IRepository"/>. 每个实体类型有唯一单例的仓库。
         /// </summary>
         /// <returns></returns>
         IRepository GetRepository();

@@ -65,7 +65,7 @@ namespace Css.Data.SqlTree
             return node;
         }
 
-        protected virtual SqlBinaryOperator VisitBinaryOperator(SqlBinaryOperator op)
+        protected virtual BinaryOp VisitBinaryOperator(BinaryOp op)
         {
             return op;
         }
@@ -114,7 +114,7 @@ namespace Css.Data.SqlTree
             return node;
         }
 
-        protected virtual SqlGroupOperator VisitGroupOperator(SqlGroupOperator op)
+        protected virtual GroupOp VisitGroupOperator(GroupOp op)
         {
             return op;
         }

@@ -12,17 +12,33 @@ namespace Css.Domain
     /// </summary>
     public class EntityMetaRepository
     {
+        /// <summary>
+        /// 实体元数据仓库单例
+        /// </summary>
         public static EntityMetaRepository Instance = new EntityMetaRepository();
 
+        /// <summary>
+        /// 实体元数据创建完成事件
+        /// </summary>
         public static event EventHandler<EntityMetaEventArgs> EntityMetaCreated;
 
+        /// <summary>
+        /// 实体元数据创建完成
+        /// </summary>
         protected void OnEntityMetaCreated(EntityMeta meta)
         {
             EntityMetaCreated?.Invoke(this, new EntityMetaEventArgs(meta));
         }
 
+        /// <summary>
+        /// 实体元数据配置完成事件
+        /// </summary>
         public static event EventHandler<EntityMetaEventArgs> EntityMetaConfigured;
 
+        /// <summary>
+        /// 实体元数据配置完成
+        /// </summary>
+        /// <param name="meta"></param>
         protected void OnEntityMetaConfigured(EntityMeta meta)
         {
             EntityMetaConfigured?.Invoke(this, new EntityMetaEventArgs(meta));

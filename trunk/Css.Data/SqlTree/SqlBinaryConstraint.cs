@@ -10,7 +10,7 @@ namespace Css.Data.SqlTree
     {
         public SqlBinaryConstraint()
         {
-            Operator = SqlBinaryOperator.Equal;
+            Operator = BinaryOp.Equal;
         }
 
         public override SqlNodeType NodeType
@@ -31,6 +31,6 @@ namespace Css.Data.SqlTree
         /// <summary>
         /// 对比条件。
         /// </summary>
-        public SqlBinaryOperator Operator { get; set; }
+        public BinaryOp Operator { get; set; }
     }
 }

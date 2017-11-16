@@ -1,5 +1,6 @@
 ﻿using Css.Data;
 using Css.Data.SqlTree;
+using System.ComponentModel;
 
 namespace Css.Domain.Query.Impl
 {
@@ -17,7 +18,7 @@ namespace Css.Domain.Query.Impl
             }
         }
 
-        OrderDirection IOrderBy.Direction
+        ListSortDirection IOrderBy.Direction
         {
             get
             {

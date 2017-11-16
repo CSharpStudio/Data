@@ -1,4 +1,6 @@
-﻿namespace Css.Data.SqlTree
+﻿using System.ComponentModel;
+
+namespace Css.Data.SqlTree
 {
     /// <summary>
     /// 排序结点。
@@ -18,6 +20,6 @@
         /// <summary>
         /// 使用这个方向进行排序。
         /// </summary>
-        public OrderDirection Direction { get; set; }
+        public ListSortDirection Direction { get; set; }
     }
 }

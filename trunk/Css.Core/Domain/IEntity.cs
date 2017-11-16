@@ -8,22 +8,25 @@ using System.Threading.Tasks;
 
 namespace Css.Domain
 {
-    public interface IEntity : IDomain, IDataErrorInfo, ICloneable, INotifyPropertyChanged, ITrackable
+    /// <summary>
+    /// 实体，属性领域对象。每个实体有唯一键。
+    /// </summary>
+    public interface IEntity : IDomain, ICloneable, INotifyPropertyChanged, ITrackable
     {
         /// <summary>
-        /// Get current entity id.
+        /// 获取当前实体唯一键。
         /// </summary>
         /// <returns></returns>
         object GetId();
 
         /// <summary>
-        /// Set current entity id.
+        /// 设置当前实体唯一键。
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">唯一键</param>
         void SetId(object id);
 
         /// <summary>
-        /// Generate an identity value for this entity.
+        /// 为实体生成唯一键。
         /// </summary>
         /// <returns></returns>
         void GenerateId();
