@@ -28,7 +28,7 @@ namespace Css.Configuration
         // - string: value stored using TypeConverter
         // - XElement: serialized object
         // - object[]: a stored list (array elements are null, string or XElement)
-        // - Properties: nested properties container
+        // - Sections: nested properties container
         Dictionary<string, object> dict = new Dictionary<string, object>();
 
         public XmlConfigSection()
@@ -170,7 +170,7 @@ namespace Css.Configuration
 
         /// <summary>
         /// Sets a single element in this Properties-container.
-        /// The element will be serialized using a TypeConverter if possible, or XAML serializer otherwise.
+        /// The element will be serialized using a TypeConverter if possible, or Json serializer otherwise.
         /// </summary>
         /// <remarks>Setting a key to <c>null</c> has the same effect as calling <see cref="Remove"/>.</remarks>
         public void Set<T>(string key, T value)
@@ -462,9 +462,9 @@ namespace Css.Configuration
 
         public static XmlConfigSection Load(XElement element)
         {
-            XmlConfigSection properties = new XmlConfigSection();
-            properties.LoadContents(element.Elements());
-            return properties;
+            XmlConfigSection section = new XmlConfigSection();
+            section.LoadContents(element.Elements());
+            return section;
         }
 
         void LoadContents(IEnumerable<XElement> elements)
