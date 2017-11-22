@@ -156,7 +156,7 @@ namespace Css.Configuration
                 {
                     try
                     {
-                        return (T)Deserialize(val, typeof(T));
+                        return val.ConvertTo<T>();
                     }
                     catch (Exception ex)
                     {
@@ -173,17 +173,75 @@ namespace Css.Configuration
 
         public IReadOnlyList<T> GetList<T>(string key)
         {
-            throw new NotImplementedException();
+            lock (syncRoot)
+            {
+                object val;
+                if (dict.TryGetValue(key, out val))
+                {
+                    var serializedArray = val as JArray;
+                    if (serializedArray != null)
+                    {
+                        try
+                        {
+                            List<T> list = new List<T>();
+                            foreach(var element in serializedArray.Values())
+                            {
+                                list.Add(element.ConvertTo<T>());
+                            }
+                            return list;
+                        }
+                        catch (NotSupportedException ex)
+                        {
+                            RT.Logger.Warn(ex);
+                        }
+                    }
+                    else
+                    {
+                        RT.Logger.Warn("JsonConfigSection.GetList(" + key + ") - this entry is not a list");
+                    }
+                }
+                return new T[0];
+            }
         }
 
         public IConfigSection GetSection(string key)
         {
-            throw new NotImplementedException();
+            bool isNewContainer = false;
+            IConfigSection result;
+            lock (syncRoot)
+            {
+                object oldValue;
+                dict.TryGetValue(key, out oldValue);
+                result = oldValue as IConfigSection;
+                if (result == null)
+                {
+                    result = new JsonConfigSection(this);
+                    dict[key] = result;
+                    isNewContainer = true;
+                }
+            }
+            if (isNewContainer)
+                OnPropertyChanged(key);
+            return result;
         }
 
         public bool Remove(string key)
         {
-            throw new NotImplementedException();
+            bool removed = false;
+            lock (syncRoot)
+            {
+                object oldValue;
+                if (dict.TryGetValue(key, out oldValue))
+                {
+                    removed = true;
+                    HandleOldValue(oldValue);
+                    MakeDirty();
+                    dict.Remove(key);
+                }
+            }
+            if (removed)
+                OnPropertyChanged(key);
+            return removed;
         }
 
         /// <summary>
@@ -193,13 +251,13 @@ namespace Css.Configuration
         /// <remarks>Setting a key to <c>null</c> has the same effect as calling <see cref="Remove"/>.</remarks>
         public void Set<T>(string key, T value)
         {
-            object serializedValue = Serialize(value, typeof(T), key);
+            object serializedValue = JToken.FromObject(value);
             SetSerializedValue(key, serializedValue);
         }
 
         public void SetList<T>(string key, IEnumerable<T> value)
         {
-            object serializedValue = Serialize(value, typeof(T), key);
+            object serializedValue = JToken.FromObject(value);
             SetSerializedValue(key, serializedValue);
         }
 
@@ -245,32 +303,6 @@ namespace Css.Configuration
             foreach (var section in dict.Values.OfType<JsonConfigSection>())
             {
                 section.SetSyncRoot(newSyncRoot);
-            }
-        }
-
-        object Serialize(object value, Type sourceType, string key)
-        {
-            if (value == null)
-                return null;
-            return JToken.FromObject(value);
-        }
-
-        object Deserialize(object serializedVal, Type targetType)
-        {
-            if (serializedVal == null)
-                return null;
-            var element = serializedVal as JToken;
-            if (element != null)
-            {
-                return element.ConvertTo(targetType);
-            }
-            else
-            {
-                string text = serializedVal as string;
-                if (text == null)
-                    throw new InvalidOperationException("Cannot read a section container as a single value");
-                TypeConverter c = TypeDescriptor.GetConverter(targetType);
-                return c.ConvertFromInvariantString(text);
             }
         }
 
@@ -339,9 +371,13 @@ namespace Css.Configuration
             {
                 if (p.Name == "_sections")
                 {
-                    JsonConfigSection section = new JsonConfigSection();
-                    section.Load((JObject)p.Value);
-                    dict[p.Name] = section;
+                    var sections = (JObject)p.Value;
+                    foreach (var child in sections.Properties())
+                    {
+                        JsonConfigSection section = new JsonConfigSection();
+                        section.Load((JObject)child.Value);
+                        dict[child.Name] = section;
+                    }
                 }
                 else
                 {

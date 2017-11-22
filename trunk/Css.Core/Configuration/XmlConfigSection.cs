@@ -144,7 +144,7 @@ namespace Css.Configuration
         /// </summary>
         /// <param name="key">Key of the item to retrieve</param>
         /// <param name="defaultValue">Default value to be returned if the key is not present.</param>
-        public T Get<T>(string key, T defaultValue)
+        public T Get<T>(string key, T defaultValue = default(T))
         {
             lock (syncRoot)
             {

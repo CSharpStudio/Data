@@ -11,16 +11,9 @@ namespace Css.Tests.Configuration
 {
     public class JsonConfigTest : DisposableBase
     {
-        [Fact]
-        public void GetSetValue()
-        {
-            ShowProperty("{}");
-            ShowProperty("{'Name':'abc'}");
-            ShowProperty("{'Name':'abc', 'Qty':0}");
-            ShowProperty("{'Array':[1,2,3]}");
-            ShowProperty("{'Array':[{'Name':'1'},{'Name':'2'}]}");
-        }
-
+        /// <summary>
+        /// Save section to json format
+        /// </summary>
         [Fact]
         public void SaveTest()
         {
@@ -38,6 +31,9 @@ namespace Css.Tests.Configuration
             var json = section.Save();
         }
 
+        /// <summary>
+        /// Load section from json format
+        /// </summary>
         [Fact]
         public void LoadTest()
         {
@@ -73,12 +69,25 @@ namespace Css.Tests.Configuration
             Assert.Equal(DateTime.Parse("2017-11-22T23:18:37.4480022+08:00"), section.Get<DateTime>("Key03"));
             Assert.Equal(123.123321m, section.Get<decimal>("Key04"));
             Assert.Equal("test string", section.Get<Cfg>("Key05").Test);
+            Assert.Equal(4, section.GetList<int>("Key06").Count);
+            Assert.Equal(123.123321m, section.GetSection("Key07").Get<decimal>("Key01"));
         }
 
         class Cfg
         {
             public string Test { get; set; }
             public DateTime DT { get; set; }
+        }
+
+
+        [Fact]
+        public void GetSetValue()
+        {
+            ShowProperty("{}");
+            ShowProperty("{'Name':'abc'}");
+            ShowProperty("{'Name':'abc', 'Qty':0}");
+            ShowProperty("{'Array':[1,2,3]}");
+            ShowProperty("{'Array':[{'Name':'1'},{'Name':'2'}]}");
         }
 
         void ShowProperty(string json)
