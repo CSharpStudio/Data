@@ -147,7 +147,7 @@ namespace Css.Configuration
         /// </summary>
         /// <param name="key">Key of the item to retrieve</param>
         /// <param name="defaultValue">Default value to be returned if the key is not present.</param>
-        public T Get<T>(string key, T defaultValue)
+        public T Get<T>(string key, T defaultValue = default(T))
         {
             lock (syncRoot)
             {
@@ -313,8 +313,7 @@ namespace Css.Configuration
                 using (var sr = new StreamReader(fileName))
                 {
                     var json = sr.ReadToEnd();
-                    var obj = JObject.Parse(json);
-                    section.Load(obj);
+                    section.Load(json);
                     return section;
                 }
             }
@@ -327,6 +326,13 @@ namespace Css.Configuration
             }
         }
 
+        public void Load(string json)
+        {
+            var obj = JObject.Parse(json);
+            Load(obj);
+        }
+
+
         void Load(JObject obj)
         {
             foreach (var p in obj.Properties())
@@ -336,6 +342,10 @@ namespace Css.Configuration
                     JsonConfigSection section = new JsonConfigSection();
                     section.Load((JObject)p.Value);
                     dict[p.Name] = section;
+                }
+                else
+                {
+                    dict[p.Name] = p.Value;
                 }
             }
         }

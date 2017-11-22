@@ -25,17 +25,54 @@ namespace Css.Tests.Configuration
         public void SaveTest()
         {
             JsonConfigSection section = new JsonConfigSection();
-            section.Set("A", "a string");
-            section.Set("b", 1);
-            section.Set("c", DateTime.Now);
-            section.Set("d", 123.123321);
-            section.Set("e", new Cfg { Test = "test string", DT = DateTime.Now });
-            section.SetList("f", new[] { 1, 2, 3, 5 });
+            section.Set("Key01", "a string");
+            section.Set("Key02", 1);
+            section.Set("Key03", DateTime.Now);
+            section.Set("Key04", 123.123321);
+            section.Set("Key05", new Cfg { Test = "test string", DT = DateTime.Now });
+            section.SetList("Key06", new[] { 1, 2, 3, 5 });
             var child = new JsonConfigSection();
-            child.Set("d", 123.123321);
-            child.Set("e", new Cfg { Test = "test string", DT = DateTime.Now });
-            section.SetSection("g", child);
+            child.Set("Key01", 123.123321);
+            child.Set("Key02", new Cfg { Test = "test string", DT = DateTime.Now });
+            section.SetSection("Key07", child);
             var json = section.Save();
+        }
+
+        [Fact]
+        public void LoadTest()
+        {
+            var json = @"{
+  ""Key01"": ""a string"",
+  ""Key02"": 1,
+  ""Key03"": ""2017-11-22T23:18:37.4480022+08:00"",
+  ""Key04"": 123.123321,
+  ""Key05"": {
+                ""Test"": ""test string"",
+    ""DT"": ""2017-11-22T23:18:37.4591099+08:00""
+  },
+  ""Key06"": [
+    1,
+    2,
+    3,
+    5
+  ],
+  ""_sections"": {
+    ""Key07"": {
+      ""Key01"": 123.123321,
+      ""Key02"": {
+        ""Test"": ""test string"",
+        ""DT"": ""2017-11-22T23:18:37.4707807+08:00""
+      }
+    }
+  }
+}";
+            JsonConfigSection section = new JsonConfigSection();
+            section.Load(json);
+            Assert.Equal("a string", section.Get<string>("Key01"));
+            Assert.Equal(1, section.Get<int>("Key02"));
+            Assert.Equal(DateTime.Parse("2017-11-22T23:18:37.4480022+08:00"), section.Get<DateTime>("Key03"));
+            Assert.Equal(123.123321m, section.Get<decimal>("Key04"));
+            Assert.Equal("test string", section.Get<Cfg>("Key05").Test);
         }
 
         class Cfg
