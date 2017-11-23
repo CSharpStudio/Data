@@ -13,20 +13,20 @@ namespace Css
 {
     public partial class AppRuntime
     {
-        static AppRuntime()
-        {
-            Config = new ConfigBuilder().LoadXmlFile("appSettings.config").Build();
-        }
-
         /// <summary>
         /// 当前的应用程序运行时。
         /// </summary>
         public static IApp App { get; internal set; }
 
+        static IConfig config;
         /// <summary>
         /// 配置文件保存在运行目录
         /// </summary>
-        public static IConfig Config { get; }
+        public static IConfig Config
+        {
+            get { return config ?? (config = ConfigManager.CreateDefault()); }
+            internal set { config = value; }
+        }
 
         /// <summary>
         /// 服务容器

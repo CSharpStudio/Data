@@ -5,8 +5,14 @@ using System.Text;
 
 namespace Css.Configuration
 {
+    /// <summary>
+    /// 配置接口，键值对存储
+    /// </summary>
     public interface IConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
         event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

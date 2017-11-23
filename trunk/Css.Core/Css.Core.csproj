@@ -30,6 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="AppRuntime.cs~RFab93d.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="%28Extensions%29\CollectionExtension.cs" />
     <Compile Include="%28Extensions%29\CommonExtension.cs" />
     <Compile Include="%28Extensions%29\StringExtension.cs" />

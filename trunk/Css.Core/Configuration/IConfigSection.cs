@@ -6,8 +6,15 @@ using System.Text;
 
 namespace Css.Configuration
 {
+    /// <summary>
+    /// A container for settings - key/value pairs where keys are strings, and values are arbitrary objects.
+    /// Instances of this class are thread-safe.
+    /// </summary>
     public interface IConfigSection
     {
+        /// <summary>
+        /// 属性变更通知
+        /// </summary>
         event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

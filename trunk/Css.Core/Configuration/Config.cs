@@ -10,10 +10,12 @@ namespace Css.Configuration
     {
         FileName configFile;
 
-        public Config(FileName file)
+        public Config(FileName file, IConfigSection section)
         {
             Check.NotNull(file, nameof(file));
+            Check.NotNull(section, nameof(section));
             configFile = file;
+            Section = section;
         }
 
         public IConfigSection Section { get; set; }
