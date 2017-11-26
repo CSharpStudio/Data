@@ -76,12 +76,10 @@ namespace Css.Configuration
         {
             try
             {
-                JsonConfigSection section = new JsonConfigSection();
                 using (var sr = new StreamReader(fileName))
                 {
                     var json = sr.ReadToEnd();
-                    section.Load(json);
-                    return section;
+                    return Load(json);
                 }
             }
             catch (Exception exc)
@@ -93,14 +91,16 @@ namespace Css.Configuration
             }
         }
 
-        public void Load(string json)
+        public static JsonConfigSection Load(string json)
         {
+            JsonConfigSection section = new JsonConfigSection();
             var obj = JObject.Parse(json);
-            Load(obj);
+            section.Load(obj);
+            return section;
         }
 
 
-        void Load(JObject obj)
+        internal void Load(JObject obj)
         {
             foreach (var p in obj.Properties())
             {

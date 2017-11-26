@@ -1,29 +1,16 @@
 {
-  "ConnectionStrings": [
-    {
-      "Name": "Master",
-      "ConnectionString": "",
-      "ProviderName": "System.Data.SqlClient"
-    },
-    {
-      "Name": "UT_SqlServer",
-      "ConnectionString": "",
-      "ProviderName": "System.Data.SqlClient"
-    },
-    {
-      "Name": "UT_Orcle",
-      "ConnectionString": "",
-      "ProviderName": "System.Data.OracleClient"
+  "_sections": {
+    "ConnectionStrings": {
+      "DbMes": {
+        "Name": "DbMes",
+        "ConnectionString": "DataSource=",
+        "ProviderName": "System.Data.SqlClient"
+      },
+      "DbMaster": {
+        "ConnectionString": "DataSource=",
+        "Name": "DbMaster",
+        "ProviderName": "System.Data.SqlClient"
+      }
     }
-  ],
-  "AppConfiguration": {
-    "MainWindow": {
-      "Height": "400",
-      "Width": "600",
-      "Top": "0",
-      "Left": "0"
-    },
-    "ConnectionString": "\"Server=(localdb)\\\\\\\\mssqllocaldb;Database=Database-0B3B0919-C8B3-481C-9833-",
-    "36C21776A565;Trusted_Connection=True;MultipleActiveResultSets=true\""
   }
 }

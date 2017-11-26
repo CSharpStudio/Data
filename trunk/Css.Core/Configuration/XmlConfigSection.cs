@@ -38,7 +38,7 @@ namespace Css.Configuration
             {
                 element.Add(new XAttribute("key", key));
             }
-            element.Value = JsonConvert.SerializeObject(value);
+            element.Value = Serialization.Serializer.XmlSerialize(value);
             return element;
         }
 
@@ -60,7 +60,7 @@ namespace Css.Configuration
             XElement element = serializedVal as XElement;
             if (element != null)
             {
-                return (T)JsonConvert.DeserializeObject(element.Value, targetType);
+                return Serialization.Serializer.XmlDeserialize<T>(element.Value);
             }
             else
             {
@@ -109,7 +109,7 @@ namespace Css.Configuration
             {
                 return Load(XDocument.Load(fileName).Root);
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 RT.Logger.Warn(exc);
                 var section = new XmlConfigSection();
@@ -125,7 +125,7 @@ namespace Css.Configuration
             return section;
         }
 
-        void LoadContents(IEnumerable<XElement> elements)
+        internal void LoadContents(IEnumerable<XElement> elements)
         {
             foreach (var element in elements)
             {
