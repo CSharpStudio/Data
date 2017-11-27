@@ -12,7 +12,7 @@ namespace Css.Data.Transaction
 {
     public abstract class LocalTransactionBlock : ContextScope
     {
-        DbSetting _dbSetting;
+        IDbSetting _dbSetting;
         IsolationLevel _level;
         /// <summary>
         /// 是否已经提交完成。
@@ -48,7 +48,7 @@ namespace Css.Data.Transaction
         /// 此级别只在最外层的代码块中有效。
         /// </param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214")]
-        public LocalTransactionBlock(DbSetting dbSetting, IsolationLevel level)
+        public LocalTransactionBlock(IDbSetting dbSetting, IsolationLevel level)
             : base(ContextItems)
         {
             _dbSetting = dbSetting;
@@ -60,7 +60,7 @@ namespace Css.Data.Transaction
         /// <summary>
         /// 对应的数据库配置
         /// </summary>
-        public DbSetting DbSetting
+        public IDbSetting DbSetting
         {
             get { return _dbSetting; }
         }

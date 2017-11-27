@@ -23,7 +23,7 @@ namespace Css.Data.Oracle
             get { return DbProvider.GetDialect(DbProvider.Oracle); }
         }
 
-        public override SqlGenerator CreateSqlGenerator()
+        public override ISqlGenerator CreateSqlGenerator()
         {
             var generator = new OracleSqlGenerator();
             generator.MaxItemsInInClause = MAX_ITEMS_IN_INCLAUSE;

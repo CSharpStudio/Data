@@ -18,7 +18,7 @@ namespace Css.Data.Transaction
 
         private DbAccesser _dba;
 
-        internal ManagedConnectionDbAccesser(DbSetting dbSetting)
+        internal ManagedConnectionDbAccesser(IDbSetting dbSetting)
         {
             if (dbSetting == null) throw new ArgumentNullException("dbSetting");
 

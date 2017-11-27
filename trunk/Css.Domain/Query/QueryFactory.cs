@@ -642,9 +642,9 @@ namespace Css.Domain.Query
             return new ValueNode { Value = value };
         }
 
-        internal void Generate(SqlGenerator generator, IQuery query, int start = 0, int end = 0)
-        {
-            generator.Generate(query as TableQuery, start, end);
-        }
+        //internal void Generate(SqlGenerator generator, IQuery query, int start = 0, int end = 0)
+        //{
+        //    generator.Generate(query as TableQuery, start, end);
+        //}
     }
 }

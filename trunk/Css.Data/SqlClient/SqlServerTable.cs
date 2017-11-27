@@ -18,7 +18,7 @@ namespace Css.Data.SqlClient
             get { return DbProvider.GetDialect(DbProvider.SqlClient); }
         }
 
-        public override SqlGenerator CreateSqlGenerator()
+        public override ISqlGenerator CreateSqlGenerator()
         {
             var generator = new SqlServerSqlGenerator();
             return generator;

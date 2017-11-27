@@ -21,19 +21,19 @@ namespace Css.Domain
         /// <summary>
         /// 这个字段用于存储运行时解析出来的 ORM 信息。
         /// </summary>
-        DbTable _dbTable;
-        public DbTable DbTable
+        IDbTable _dbTable;
+        public IDbTable DbTable
         {
-            get { return _dbTable ?? (_dbTable = DbProvider.CreateTable(DbSetting, TableInfo)); }
+            get { return _dbTable ?? (_dbTable = DbManager.Manager.CreateDbTable(DbSetting, TableInfo)); }
         }
 
-        DbSetting _dbSetting;
-        protected DbSetting DbSetting
+        IDbSetting _dbSetting;
+        protected IDbSetting DbSetting
         {
-            get { return _dbSetting ?? (_dbSetting = DbSetting.FindOrCreate(ConnectionStringName)); }
+            get { return _dbSetting ?? (_dbSetting = DbManager.Manager.GetDbSetting(ConnectionStringName)); }
         }
 
-        DbSetting IDbRepository.DbSetting
+        IDbSetting IDbRepository.DbSetting
         {
             get { return DbSetting; }
         }
@@ -53,6 +53,12 @@ namespace Css.Domain
             get { return _entityMeta ?? (_entityMeta = EntityMetaRepository.Instance.Find(EntityType)); }
         }
 
+        VarPropertyContainer _propertyContainer;
+        public VarPropertyContainer PropertyContainer
+        {
+            get { return _propertyContainer ?? (_propertyContainer = VarTypeRepository.Instance.GetVarPropertyContainer(EntityType)); }
+        }
+
         public abstract string ConnectionStringName { get; }
 
         /// <summary>
@@ -61,7 +67,7 @@ namespace Css.Domain
         /// <returns></returns>
         public IDbAccesser CreateDbAccesser()
         {
-            return DbAccesserFactory.Create(DbSetting);
+            return DbManager.Manager.CreateDbAccesser(DbSetting);
         }
 
         public virtual IEntity GetById(object id)
@@ -90,7 +96,7 @@ namespace Css.Domain
             return ToList(query);
         }
 
-        void IRepository.Save(IDomain component)
+        public void Save(IDomain component)
         {
             if (component is Entity)
                 Save(component as Entity);
@@ -219,46 +225,6 @@ namespace Css.Domain
             }
         }
 
-        IRefEntityProperty _parentProperty;
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        IRefEntityProperty IEntityRepository.ParentProperty
-        {
-            get
-            {
-                if (_parentProperty == null)
-                {
-                    _parentProperty = PropertyContainer.Properties.OfType<IRefEntityProperty>().FirstOrDefault(p => p.ReferenceType == ReferenceType.Parent);
-                }
-                return _parentProperty;
-            }
-        }
-
-        VarPropertyContainer _propertyContainer;
-        VarPropertyContainer PropertyContainer
-        {
-            get { return _propertyContainer ?? (_propertyContainer = VarTypeRepository.Instance.GetVarPropertyContainer(EntityType)); }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        IProperty IEntityRepository.FindProperty(string propertyName)
-        {
-            return PropertyContainer.Properties.FirstOrDefault(p => p.Name == propertyName) as IProperty;
-        }
-
-        IList<IProperty> _childProperties;
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033")]
-        IList<IProperty> IEntityRepository.GetChildProperties()
-        {
-            if (_childProperties == null)
-            {
-                _childProperties = PropertyContainer.Properties
-                    .Where(p => p is IListProperty && (p as IListProperty).HasManyType == HasManyType.Composition)
-                    .Cast<IProperty>()
-                    .ToArray();
-            }
-            return _childProperties;
-        }
-
         public long GetNextId()
         {
             using (var dba = CreateDbAccesser())
@@ -279,7 +245,7 @@ namespace Css.Domain
             }
         }
 
-        public IList ToList(IQuery query, int start = 0, int end = 0)
+        public IEntityList ToList(IQuery query, int start = 0, int end = 0)
         {
             using (var dba = CreateDbAccesser())
             {
@@ -330,34 +296,29 @@ namespace Css.Domain
             }
         }
 
-        public Task<IEntity> GetByIdAsync(object id)
+        public async Task<IEntity> GetByIdAsync(object id)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => GetById(id));
         }
 
-        public Task SaveAsync(IDomain entity)
+        public async Task SaveAsync(IDomain entity)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => Save(entity));
         }
 
-        public Task<int> CountAsync(IQuery query)
+        public async Task<int> CountAsync(IQuery query)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => Count(query));
         }
 
-        IEntityList IRepository.ToList(IQuery query, int start, int end)
+        public async Task<IEntityList> ToListAsync(IQuery query, int start, int end)
         {
-            throw new NotImplementedException();
+            return await Task.Run(() => ToList(query, start, end));
         }
 
-        public Task<IEntityList> ToListAsync(IQuery query, int start, int end)
+        public async Task<IEntity> FirstOrDefaultAsync(IQuery query)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEntity> FirstOrDefaultAsync(IQuery query)
-        {
-            throw new NotImplementedException();
+            return await Task.Run(() => FirstOrDefault(query));
         }
     }
 

@@ -32,7 +32,7 @@ namespace Css.Data
 
         bool _isConnectionCreated;
 
-        DbConnectionSchema _connectionSchema;
+        IDbSetting _connectionSchema;
 
         public ISqlDialect SqlDialect => _sqlDialect;
 
@@ -46,7 +46,7 @@ namespace Css.Data
         /// </summary>
         public IDbParameterFactory ParameterFactory => this;
 
-        public DbConnectionSchema DbConnectionSchema => _connectionSchema;
+        public IDbSetting DbConnectionSchema => _connectionSchema;
 
         #region Constructor
 
@@ -74,14 +74,14 @@ namespace Css.Data
             Check.NotNullOrEmpty(connectionString, nameof(connectionString));
             Check.NotNullOrEmpty(connectionProvider, nameof(connectionProvider));
 
-            Init(new DbConnectionSchema(connectionString, connectionProvider));
+            Init(new DbSetting(connectionString, connectionProvider));
         }
 
         /// <summary>
         /// 初始化实例<see cref="DbAccesser"/>.通过schema查找链接字符串，创建数据库链接
         /// </summary>
         /// <param name="schema">数据库链接方案</param>
-        public DbAccesser(DbConnectionSchema schema)
+        public DbAccesser(IDbSetting schema)
         {
             Check.NotNull(schema, nameof(schema));
             Init(schema);
@@ -92,12 +92,12 @@ namespace Css.Data
         /// </summary>
         /// <param name="schema">数据库链接方案</param>
         /// <param name="dbConnection">使用已存在的数据库链接而不是创建新的</param>
-        public DbAccesser(DbConnectionSchema schema, IDbConnection dbConnection)
+        public DbAccesser(IDbSetting schema, IDbConnection dbConnection)
         {
             Init(schema, dbConnection);
         }
 
-        void Init(DbConnectionSchema schema, IDbConnection connection = null)
+        void Init(IDbSetting schema, IDbConnection connection = null)
         {
             _connectionSchema = schema;
 

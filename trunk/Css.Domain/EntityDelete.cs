@@ -25,7 +25,6 @@ namespace Css.Domain
         SimplePropertyFinder PropertyFinder { get; }
         public EntityDelete(IRepository repo)
         {
-            Debug.Assert(repo is IDbRepository, "仓库必须是IDbRepository");
             _repo = repo;
             PropertyFinder = new SimplePropertyFinder(_repo);
             Expression = Expression.Constant(this);

@@ -18,11 +18,11 @@ namespace Css.Data.Transaction
 
         private IDbConnection _connection;
 
-        private DbSetting _dbSetting;
+        private IDbSetting _dbSetting;
 
         private TransactionScopeConnectionManager() { }
 
-        public static TransactionScopeConnectionManager GetManager(DbSetting dbSetting)
+        public static TransactionScopeConnectionManager GetManager(IDbSetting dbSetting)
         {
             var res = new TransactionScopeConnectionManager();
 
@@ -48,7 +48,7 @@ namespace Css.Data.Transaction
             get { return _connection; }
         }
 
-        public DbSetting DbSetting
+        public IDbSetting DbSetting
         {
             get { return _dbSetting; }
         }

@@ -3,6 +3,7 @@ using Css.Domain.Query;
 using Css.Domain.Query.Linq;
 using Css.Reflection;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
@@ -140,10 +141,23 @@ namespace Css.Domain
         {
             Debug.Assert(repo is IEntityRepository, "仓库必须是IEntityRepository");
             var entityRepo = repo as IEntityRepository;
-            var result = entityRepo.ParentProperty;
+            var result = entityRepo.PropertyContainer.Properties.OfType<IRefEntityProperty>().FirstOrDefault(p => p.ReferenceType == ReferenceType.Parent);
             if (result == null)
                 throw new ORMException("类型[{0}]没找到父引用属性".FormatArgs(repo.EntityType.Name));
             return result;
+        }
+
+        public static IProperty FindProperty(this IEntityRepository repo, string propertyName)
+        {
+            return repo.PropertyContainer.Properties.FirstOrDefault(p => p.Name == propertyName) as IProperty;
+        }
+
+        public static IList<IProperty> GetChildProperties(this IEntityRepository repo)
+        {
+            return repo.PropertyContainer.Properties
+                .Where(p => p is IListProperty && (p as IListProperty).HasManyType == HasManyType.Composition)
+                .Cast<IProperty>()
+                .ToArray();
         }
 
         public static IProperty FindProperty(this IRepository repo, string propertyName)

@@ -13,7 +13,7 @@ namespace Css.Data.Common
     /// <summary>
     /// 为 SqlNode 语法树生成相应 Sql 的生成器。
     /// </summary>
-    public abstract class SqlGenerator : SqlNodeVisitor
+    public abstract class SqlGenerator : SqlNodeVisitor, ISqlGenerator
     {
         internal const string WILDCARD_ALL = "%";
         internal const string WILDCARD_SINGLE = "_";

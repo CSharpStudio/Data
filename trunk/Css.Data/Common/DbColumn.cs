@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Css.Data.Common
 {
     [DebuggerDisplay("Name:{Name}")]
-    public class DbColumn
+    public class DbColumn : IDbColumn
     {
         DbTable _table;
         IColumnInfo _columnInfo;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Css.ComponentModel
 {
-    public class VarTypeRepository
+    internal class VarTypeRepository
     {
         public static VarTypeRepository Instance = new VarTypeRepository();
 

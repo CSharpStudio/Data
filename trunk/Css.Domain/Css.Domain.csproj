@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Css.Core\Css.Core.csproj" />
-    <ProjectReference Include="..\Css.Data\Css.Data.csproj" />
   </ItemGroup>
 
 </Project>

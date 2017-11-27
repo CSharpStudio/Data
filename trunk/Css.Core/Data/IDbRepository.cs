@@ -10,8 +10,8 @@ namespace Css.Data
     /// </summary>
     public interface IDbRepository
     {
-        DbSetting DbSetting { get; }
+        IDbSetting DbSetting { get; }
         IDbAccesser CreateDbAccesser();
-        DbTable DbTable { get; }
+        IDbTable DbTable { get; }
     }
 }

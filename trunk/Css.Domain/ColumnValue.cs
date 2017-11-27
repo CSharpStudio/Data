@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Css.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Css.Data
+namespace Css.Domain
 {
     /// <summary>
     /// 列值

@@ -24,14 +24,14 @@ namespace Css.Data.Transaction
         /// 构造一个事务块
         /// </summary>
         /// <param name="dbSetting">整个数据库的配置名</param>
-        public SingleTransactionScope(DbSetting dbSetting) : base(dbSetting, IsolationLevel.Unspecified) { }
+        public SingleTransactionScope(IDbSetting dbSetting) : base(dbSetting, IsolationLevel.Unspecified) { }
 
         /// <summary>
         /// 构造一个事务块
         /// </summary>
         /// <param name="dbSetting">整个数据库的配置名</param>
         /// <param name="level">事务的孤立级别</param>
-        public SingleTransactionScope(DbSetting dbSetting, IsolationLevel level) : base(dbSetting, level) { }
+        public SingleTransactionScope(IDbSetting dbSetting, IsolationLevel level) : base(dbSetting, level) { }
 
         protected override IDbTransaction BeginTransaction()
         {

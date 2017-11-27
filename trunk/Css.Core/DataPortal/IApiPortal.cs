@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Css.DataProtal
+namespace Css.DataPortal
 {
     public interface IApiPortal
     {

@@ -20,6 +20,6 @@ namespace Css.Data.Transaction
         /// <summary>
         /// 对应的数据库配置信息
         /// </summary>
-        DbSetting DbSetting { get; }
+        IDbSetting DbSetting { get; }
     }
 }

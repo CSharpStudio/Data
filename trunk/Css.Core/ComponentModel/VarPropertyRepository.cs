@@ -29,7 +29,7 @@ namespace Css.ComponentModel
 
         public static void RegisterProperty(VarProperty property)
         {
-            if (property == null) throw new ArgumentNullException("property");
+            Check.NotNull(property, nameof(property));
             if (property.GlobalIndex >= 0) { throw new InvalidOperationException("同一个属性只能注册一次。"); }
 
             lock (propertyLock)
@@ -41,8 +41,8 @@ namespace Css.ComponentModel
 
         public void RegisterProperty(string propertyName, Type propertyType, bool serializable = true)
         {
-            if (propertyName.IsNullOrEmpty()) throw new ArgumentNullException(nameof(propertyName));
-            if (propertyType == null) throw new ArgumentNullException(nameof(propertyType));
+            Check.NotNullOrEmpty(propertyName, nameof(propertyName));
+            Check.NotNull(propertyType, nameof(propertyType));
 
             var property = new VarProperty(OwnerType, propertyName, propertyType, serializable);
 

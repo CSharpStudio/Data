@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Css.DataProtal
+namespace Css.DataPortal
 {
     [DataContract, Serializable]
     public class ApiRequest

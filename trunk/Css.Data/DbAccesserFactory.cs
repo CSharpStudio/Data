@@ -47,7 +47,7 @@ namespace Css.Data
         /// </summary>
         /// <param name="dbSetting">数据库配置。</param>
         /// <returns></returns>
-        public static IDbAccesser Create(DbSetting dbSetting)
+        public static IDbAccesser Create(IDbSetting dbSetting)
         {
             return new ManagedConnectionDbAccesser(dbSetting);
         }

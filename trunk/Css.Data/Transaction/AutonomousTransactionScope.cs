@@ -17,7 +17,7 @@ namespace Css.Data.Transaction
         /// 构造一个事务块
         /// </summary>
         /// <param name="dbSetting">整个数据库的配置名</param>
-        public AutonomousTransactionScope(DbSetting dbSetting) : base(dbSetting, IsolationLevel.Unspecified)
+        public AutonomousTransactionScope(IDbSetting dbSetting) : base(dbSetting, IsolationLevel.Unspecified)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Css.Data.Transaction
         /// </summary>
         /// <param name="dbSetting">整个数据库的配置名</param>
         /// <param name="level">事务的孤立级别</param>
-        public AutonomousTransactionScope(DbSetting dbSetting, IsolationLevel level) : base(dbSetting, level)
+        public AutonomousTransactionScope(IDbSetting dbSetting, IsolationLevel level) : base(dbSetting, level)
         {
         }
 

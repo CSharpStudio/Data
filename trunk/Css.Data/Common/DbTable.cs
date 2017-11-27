@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Css.Data.Common
 {
-    public abstract class DbTable
+    public abstract class DbTable : IDbTable
     {
         ITableInfo _tableInfo;
 
@@ -22,6 +22,9 @@ namespace Css.Data.Common
         /// 主键列。
         /// </summary>
         public DbColumn PKColumn { get; protected set; }
+
+        IDbColumn IDbTable.PKColumn { get { return PKColumn; } }
+
         /// <summary>
         /// 时间戳，某些表会没有
         /// </summary>
@@ -32,7 +35,7 @@ namespace Css.Data.Common
             get { return _columns; }
         }
 
-        public abstract SqlGenerator CreateSqlGenerator();
+        public abstract ISqlGenerator CreateSqlGenerator();
 
         public abstract ISqlDialect SqlDialect { get; }
 

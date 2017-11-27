@@ -104,12 +104,12 @@ namespace Css.Data.Common
         /// <summary>
         /// 创建<see cref="DbTable"/>
         /// </summary>
-        /// <param name="schema"></param>
+        /// <param name="setting"></param>
         /// <param name="info"></param>
         /// <returns></returns>
-        public static DbTable CreateTable(DbConnectionSchema schema, ITableInfo info)
+        public static IDbTable CreateTable(IDbSetting setting, ITableInfo info)
         {
-            switch (schema.ProviderName)
+            switch (setting.ProviderName)
             {
                 case SqlClient:
                     return new SqlServerTable(info);
@@ -118,12 +118,12 @@ namespace Css.Data.Common
                 case ODP:
                     return new OracleTable(info);
             }
-            DbProvider provider = GetProvider(schema.ProviderName);
-            return provider.CreateDbTable(schema, info);
+            DbProvider provider = GetProvider(setting.ProviderName);
+            return provider.CreateDbTable(setting, info);
         }
 
         protected abstract ISqlDialect CreateDialect(string provider);
 
-        protected abstract DbTable CreateDbTable(DbConnectionSchema schema, ITableInfo info);
+        protected abstract DbTable CreateDbTable(IDbSetting setting, ITableInfo info);
     }
 }

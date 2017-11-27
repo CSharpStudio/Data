@@ -2,20 +2,81 @@
 using Css.Data.Common;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
+using System.Data;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Css.Data
 {
     /// <summary>
-    /// 数据库配置
+    /// 数据库连接结构/方案
     /// </summary>
-    public class DbSetting : DbConnectionSchema
+    public class DbSetting : IDbSetting
     {
-        DbSetting() { }
+        string _database;
+
+        public DbSetting(string connectionString, string providerName)
+        {
+            ConnectionString = connectionString;
+            ProviderName = providerName;
+        }
+
+        /// <summary>
+        /// 子类使用
+        /// </summary>
+        internal DbSetting() { }
+
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
+        public string ConnectionString { get; internal set; }
+
+        /// <summary>
+        /// 连接的提供器名称
+        /// </summary>
+        public string ProviderName { get; internal set; }
+
+        /// <summary>
+        /// 对应的数据库名称
+        /// </summary>
+        public string Database
+        {
+            get { return (_database ?? (_database = ParseDbName())); }
+        }
+
+        string ParseDbName()
+        {
+            var con = CreateConnection();
+            var database = con.Database;
+
+            //System.Data.OracleClient 解析不出这个值，需要特殊处理。
+            if (database.IsNullOrWhiteSpace())
+            {
+                //Oracle 中，把用户名（Schema）认为数据库名。
+                var match = Regex.Match(ConnectionString, @"User Id=\s*(?<dbName>\w+)\s*");
+                if (!match.Success)
+                {
+                    throw new NotSupportedException("无法解析出此数据库连接字符串中的数据库名：" + ConnectionString);
+                }
+                database = match.Groups["dbName"].Value;
+            }
+
+            return database;
+        }
+
+        /// <summary>
+        /// 使用当前的结构来创建一个连接。
+        /// </summary>
+        /// <returns></returns>
+        public IDbConnection CreateConnection()
+        {
+            var factory = DbProvider.GetFactory(ProviderName);
+
+            var connection = factory.CreateConnection();
+            connection.ConnectionString = ConnectionString;
+
+            return connection;
+        }
 
         /// <summary>
         /// 配置名称
@@ -40,20 +101,14 @@ namespace Css.Data
                     if (!_generatedSettings.TryGetValue(dbSettingName, out setting))
                     {
                         var config = RT.Config.GetConnectionString(dbSettingName);
-                        if (config != null)
+                        if (config == null)
+                            throw new DataException("找不到名为[{0}]的ConnectionString".FormatArgs(dbSettingName));
+                        setting = new DbSetting
                         {
-                            setting = new DbSetting
-                            {
-                                ConnectionString = config.ConnectionString,
-                                ProviderName = config.ProviderName,
-                            };
-                        }
-                        else
-                        {
-                            setting = Create(dbSettingName);
-                        }
-
-                        setting.Name = dbSettingName;
+                            Name = dbSettingName,
+                            ConnectionString = config.ConnectionString,
+                            ProviderName = config.ProviderName,
+                        };
 
                         _generatedSettings.Add(dbSettingName, setting);
                     }
@@ -100,37 +155,5 @@ namespace Css.Data
         }
 
         static Dictionary<string, DbSetting> _generatedSettings = new Dictionary<string, DbSetting>();
-
-        static DbSetting Create(string dbSettingName)
-        {
-            //查找连接字符串时，根据用户的 LocalSqlServer 来查找。
-            var local = RT.Config.GetConnectionString(DbProvider.LocalServer);
-            if (local != null && local.ProviderName == DbProvider.SqlClient)
-            {
-                var builder = new SqlConnectionStringBuilder(local.ConnectionString);
-
-                var newCon = new SqlConnectionStringBuilder();
-                newCon.DataSource = builder.DataSource;
-                newCon.InitialCatalog = dbSettingName;
-                newCon.IntegratedSecurity = builder.IntegratedSecurity;
-                if (!newCon.IntegratedSecurity)
-                {
-                    newCon.UserID = builder.UserID;
-                    newCon.Password = builder.Password;
-                }
-
-                return new DbSetting
-                {
-                    ConnectionString = newCon.ToString(),
-                    ProviderName = local.ProviderName
-                };
-            }
-
-            return new DbSetting
-            {
-                ConnectionString = string.Format(@"Data Source={0}.sdf", dbSettingName),
-                ProviderName = "System.Data.SqlServerCe"
-            };
-        }
     }
 }

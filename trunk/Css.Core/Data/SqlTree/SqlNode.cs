@@ -1,12 +1,10 @@
-﻿using Css.Data.SqlClient;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Css.Data.SqlTree
 {
     /// <summary>
     /// 表示 Sql 语法树中的一个节点。
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay}")]
     public abstract class SqlNode : ISqlNode
     {
         /// <summary>
@@ -16,16 +14,6 @@ namespace Css.Data.SqlTree
         /// The type of the node.
         /// </value>
         public abstract SqlNodeType NodeType { get; }
-
-        string DebuggerDisplay
-        {
-            get
-            {
-                var generator = new SqlServerSqlGenerator();
-                generator.Generate(this);
-                return string.Format(generator.Sql, generator.Sql.Parameters);
-            }
-        }
     }
 
     /// <summary>
